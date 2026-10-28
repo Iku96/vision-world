@@ -44,3 +44,69 @@
     outline-color: var(--color-orange-light);
   }
 }
+
+/* Scroll motion. Only active with html.motion, which is skipped for reduced motion.
+   ScrollMotion.astro marks elements below the fold with data-reveal and adds .is-visible
+   as they enter the screen. Transforms and opacity only, so no layout shift. */
+@layer components {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  .motion [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+
+  /* Transitions start a frame after marking, so the hidden starting state applies instantly. */
+  .motion [data-reveal].reveal-ready {
+    transition:
+      opacity 0.6s ease,
+      transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .motion [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Orange route lines draw in once their step is visible. */
+  .motion [data-reveal] .draw-y {
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.9s cubic-bezier(0.6, 0, 0.3, 1) 0.35s;
+  }
+
+  .motion [data-reveal].is-visible .draw-y {
+    transform: none;
+  }
+
+  @media (min-width: 64rem) {
+    .motion [data-reveal] .lg\:draw-x {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .motion [data-reveal].is-visible .lg\:draw-x {
+      transform: none;
+    }
+  }
+
+  /* Cards lift towards the pointer. */
+  .lift {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px -12px rgb(11 31 115 / 0.3);
+    }
+  }
+}

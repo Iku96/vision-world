@@ -1,0 +1,24 @@
+---
+import Icon from './Icon.astro';
+import { getUi } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+// Shown by ScrollMotion once the visitor has scrolled down. Sits above the mobile CTA bar.
+// Smooth scrolling comes from scroll-behavior in global.css (off for reduced motion).
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<a
+  href="#top"
+  aria-label={t(getUi().backToTop, locale)}
+  title={t(getUi().backToTop, locale)}
+  class="invisible fixed right-4 bottom-[calc(5.25rem+env(safe-area-inset-bottom))] z-30 flex size-12 translate-y-3 items-center justify-center rounded-full bg-navy text-white opacity-0 shadow-lg ring-2 ring-white transition-[opacity,transform,visibility,background-color] duration-300 hover:bg-navy-dark lg:right-6 lg:bottom-6"
+  data-back-to-top
+>
+  <Icon name="arrowUp" class="size-5" />
+</a>

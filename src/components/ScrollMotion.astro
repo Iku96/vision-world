@@ -1,0 +1,87 @@
+---
+// Scroll behaviour for every page:
+// - header progress line and back-to-top button visibility
+// - reveal animations: blocks below the fold rise in as they enter the screen,
+//   list items one after another. Only with html.motion (not set for reduced motion).
+---
+
+<script>
+  const root = document.documentElement;
+
+  // Progress line and back-to-top button.
+  const progress = document.querySelector<HTMLElement>('[data-scroll-progress]');
+  const backToTop = document.querySelector<HTMLElement>('[data-back-to-top]');
+  const SHOWN = ['visible', 'opacity-100', 'translate-y-0'];
+  const HIDDEN = ['invisible', 'opacity-0', 'translate-y-3'];
+  let queued = false;
+
+  const onScroll = () => {
+    queued = false;
+    const max = root.scrollHeight - innerHeight;
+    if (progress) progress.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`;
+    if (backToTop) {
+      const show = scrollY > innerHeight * 0.8;
+      backToTop.classList.remove(...(show ? HIDDEN : SHOWN));
+      backToTop.classList.add(...(show ? SHOWN : HIDDEN));
+    }
+  };
+  const queue = () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(onScroll);
+    }
+  };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  onScroll();
+
+  // Reveals: the blocks inside each section after the first (hero or page header).
+  // Lists reveal item by item. Anything already on screen is left alone, so nothing flickers.
+  if (root.classList.contains('motion') && 'IntersectionObserver' in window) {
+    const targets: { el: Element; index: number }[] = [];
+    for (const section of document.querySelectorAll('main > section:not(:first-child)')) {
+      const only = section.children.length === 1 ? section.firstElementChild : null;
+      const container = only?.tagName === 'DIV' ? only : section;
+      for (const child of container.children) {
+        if (child.matches('ul, ol')) [...child.children].forEach((el, index) => targets.push({ el, index }));
+        else if (!child.matches('script, .sr-only')) targets.push({ el: child, index: 0 });
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const el = entry.target as HTMLElement;
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+          // Once every effect has finished (including route lines drawing in), drop the reveal
+          // styles so hover effects and later layout changes work normally.
+          setTimeout(() => {
+            delete el.dataset.reveal;
+            el.classList.remove('is-visible', 'reveal-ready');
+            el.style.removeProperty('--reveal-delay');
+          }, 1400 + parseInt(el.style.getPropertyValue('--reveal-delay') || '0'));
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+    );
+
+    const marked: HTMLElement[] = [];
+    for (const { el, index } of targets) {
+      if (!(el instanceof HTMLElement) || el.getBoundingClientRect().top < innerHeight) continue;
+      el.dataset.reveal = '';
+      el.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 90}ms`);
+      marked.push(el);
+    }
+    // Let the hidden state apply without animating, then enable transitions and start observing.
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        for (const el of marked) {
+          el.classList.add('reveal-ready');
+          observer.observe(el);
+        }
+      }),
+    );
+  }
+</script>

@@ -103,6 +103,7 @@ Serious, trustworthy B2B trading company. Clean, bold, modern. Not flashy.
 
 - Preview banner above the header on every page while `siteSettings.previewBanner` is true. When turning it off, also remove the banner allowance in `src/components/home/heroHeight.ts`.
 - Home hero: yard photo with navy gradient, dotted globe (Korea and Tanzania highlighted) and a "Now sourcing" split-flap board; each flip sends a pulse along the Korea to Tanzania arc. Fits one phone screen with buttons visible.
+- Scroll motion (`ScrollMotion.astro`, styles in `global.css`): blocks below the fold rise in as they enter the screen, list items one after another; route lines draw in; orange progress line on the header; back-to-top button after scrolling; cards lift on hover. Transforms and opacity only (no layout shift), all off for `prefers-reduced-motion`, and nothing is hidden if JavaScript fails.
 - Sticky white header: logo, nav (desktop), language switcher, WhatsApp button (desktop). Hamburger menu below `lg`.
 - Below `lg`, a fixed bottom bar holds WhatsApp (primary) and Request a quote. The body gets bottom padding so it never covers content.
 - Navy footer with contact details and page links.
@@ -149,7 +150,7 @@ Do not present these as fact on the site until confirmed. Keep the current wordi
 - **Inspection:** whether buyers can inspect goods in Tanzania before handover, as the current How We Work copy implies.
 - **Handover:** how and where delivery or collection happens in Tanzania.
 - **CEO details:** ~~name~~ received: Joseph Makina (in `siteSettings.ceo`). Still needed: story, quote, portrait photo.
-- **Contact details:** WhatsApp number (currently `+255XXXXXXXXX`), phone, email, opening hours. Address: ~~building~~ received: Noble Centre, Makumbusho, Dar es Salaam. Still needed: floor and office number.
+- ~~**Contact details**~~ received: phone and WhatsApp +255 680 418 090, info@vision-world.com, Monday to Friday 9am to 5pm, 4th Floor, Noble Center, Makumbusho, Dar es Salaam (all in `siteSettings.contact`).
 - **Copy in `[CONFIRM: ...]` brackets:** How We Work step details and FAQ answers (payment, inspection, timelines, documents, who you sell to), category examples, company history.
 - **About page values:** the four values are general wording written for review, not supplied by the client.
 - **Sample listings:** all nine are placeholders. Replace with real stock.

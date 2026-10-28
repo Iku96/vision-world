@@ -61,7 +61,7 @@ export const howWeWorkPage: HowWeWorkPage = {
       {
         question: { en: 'Where are you based?' },
         answer: {
-          en: 'Our office is at Noble Centre, Makumbusho, Dar es Salaam. [FLOOR AND OFFICE NUMBER] See the Contact page for the map.',
+          en: 'Our office is on the 4th floor of Noble Center, Makumbusho, Dar es Salaam. See the Contact page for the map.',
         },
       },
     ],

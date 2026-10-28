@@ -49,23 +49,23 @@ const year = new Date().getFullYear();
     <div>
       <h2 class="font-heading text-sm font-bold uppercase tracking-wider text-orange-light">{t(ui.footerContact, locale)}</h2>
       <ul class="mt-4 space-y-3 text-sm">
-        <li class="flex gap-3">
-          <Icon name="phone" class="mt-0.5 size-4 shrink-0 text-silver" />
+        <li class="flex items-center gap-3">
+          <Icon name="phone" class="size-4 shrink-0 text-silver" />
           {
             isPlaceholder(contact.phone) ? (
               <span>{contact.phone}</span>
             ) : (
-              <a href={`tel:${contact.phone.replace(/\s/g, '')}`} class="hover:underline">{contact.phone}</a>
+              <a href={`tel:${contact.phone.replace(/\s/g, '')}`} class="inline-flex min-h-11 items-center hover:underline">{contact.phone}</a>
             )
           }
         </li>
-        <li class="flex gap-3">
-          <Icon name="mail" class="mt-0.5 size-4 shrink-0 text-silver" />
+        <li class="flex items-center gap-3">
+          <Icon name="mail" class="size-4 shrink-0 text-silver" />
           {
             isPlaceholder(contact.email) ? (
               <span>{contact.email}</span>
             ) : (
-              <a href={`mailto:${contact.email}`} class="hover:underline">{contact.email}</a>
+              <a href={`mailto:${contact.email}`} class="inline-flex min-h-11 items-center hover:underline">{contact.email}</a>
             )
           }
         </li>

@@ -48,4 +48,5 @@ export const ui = {
   filterEmpty: { en: 'No listings match these filters right now. Ask us on WhatsApp and we will look for it.' },
   price: { en: 'Price' },
   galleryLabel: { en: 'Photos' },
+  backToTop: { en: 'Back to top' },
 } satisfies Record<string, LocalizedString>;

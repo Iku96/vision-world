@@ -19,15 +19,15 @@ export const siteSettings: SiteSettings = {
     alt: { en: 'Vision World' },
   },
   contact: {
-    whatsappNumber: '+255XXXXXXXXX',
+    whatsappNumber: '+255 680 418 090',
     whatsappMessage: {
       en: 'Hello Vision World, I would like a quote.',
     },
-    phone: '[PHONE NUMBER]',
-    email: '[EMAIL ADDRESS]',
-    address: { en: '[FLOOR AND OFFICE NUMBER], Noble Centre, Makumbusho, Dar es Salaam, Tanzania' },
-    mapQuery: 'Noble Centre, Makumbusho, Dar es Salaam, Tanzania',
-    hours: { en: '[OPENING HOURS]' },
+    phone: '+255 680 418 090',
+    email: 'info@vision-world.com',
+    address: { en: '4th Floor, Noble Center, Makumbusho, Dar es Salaam, Tanzania' },
+    mapQuery: 'Noble Center, Makumbusho, Dar es Salaam, Tanzania',
+    hours: { en: 'Monday to Friday, 9am to 5pm' },
   },
   social: [],
   seo: {

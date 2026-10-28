@@ -23,7 +23,7 @@ const image = listing.images[0] ?? { src: '', alt: listing.title };
 const href = localizePath(`stock/${listing.slug.current}`, locale);
 ---
 
-<article class="flex flex-col overflow-hidden rounded-md border border-silver bg-white">
+<article class="lift flex h-full flex-col overflow-hidden rounded-md border border-silver bg-white">
   <a href={href} class="relative block" tabindex="-1" aria-hidden="true">
     <Photo
       image={image}

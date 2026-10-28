@@ -20,7 +20,7 @@ const divisions = getDivisions();
     <ul class="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 xl:grid-cols-5">
       {
         divisions.map((division) => (
-          <li class="flex flex-col rounded-md border border-silver p-5">
+          <li class="lift flex flex-col rounded-md border border-silver p-5">
             {division.status === 'comingSoon' && (
               <span class="self-start rounded bg-orange-light px-2 py-0.5 text-xs font-bold tracking-wider text-ink uppercase">
                 {t(ui.comingSoon, locale)}

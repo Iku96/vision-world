@@ -25,6 +25,7 @@ const items = main.map((item) => ({
 ---
 
 <header class="sticky top-0 z-40 border-b border-silver bg-white">
+  <div class="absolute inset-x-0 -bottom-px h-0.5 origin-left scale-x-0 bg-orange" aria-hidden="true" data-scroll-progress></div>
   <div class="mx-auto flex h-16 max-w-7xl lg:h-20 items-center gap-4 px-4 sm:px-6 lg:px-8">
     <a href={localizePath('', locale)} class="shrink-0" aria-label={t(ui.homeLink, locale)}>
       <Logo locale={locale} size="h-[3.25rem] lg:h-16" />

@@ -6,7 +6,7 @@ export const contactPage: ContactPage = {
   seo: {
     title: { en: 'Contact and request a quote' },
     description: {
-      en: 'Request a quote from Vision World. Chat on WhatsApp or send us the details of what you need. Noble Centre, Makumbusho, Dar es Salaam.',
+      en: 'Request a quote from Vision World. Chat on WhatsApp or send us the details of what you need. Noble Center, Makumbusho, Dar es Salaam.',
     },
   },
   header: {
@@ -19,7 +19,7 @@ export const contactPage: ContactPage = {
     text: { en: 'Send a message with what you are looking for and we will reply with options.' },
   },
   detailsHeading: { en: 'Contact details' },
-  mapTitle: { en: 'Map showing Noble Centre, Makumbusho, Dar es Salaam' },
+  mapTitle: { en: 'Map showing Noble Center, Makumbusho, Dar es Salaam' },
   form: {
     heading: { en: 'Send us your request' },
     intro: { en: 'Prefer email? Fill in the form and we will get back to you.' },
