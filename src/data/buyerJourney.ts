@@ -12,6 +12,11 @@ export const buyerJourney: BuyerJourneyStep[] = [
     description: {
       en: 'Tell us what you need. We look for it in South Korea and beyond, and share photos and details before you decide.',
     },
+    details: [
+      { en: 'Share the make, model, specification or product you need, and your budget.' },
+      { en: 'We search in South Korea and beyond and send you options with photos and details.' },
+      { en: 'You choose the option that suits you.' },
+    ],
   },
   {
     _id: 'journey-import',
@@ -22,6 +27,11 @@ export const buyerJourney: BuyerJourneyStep[] = [
     description: {
       en: 'Your goods make the journey to Tanzania. We keep you informed at every stage.',
     },
+    details: [
+      { en: 'Your goods are prepared for the journey to Tanzania.' },
+      { en: 'We keep you informed of progress and expected timing.' },
+      { en: '[CONFIRM: who arranges shipping and customs clearing]' },
+    ],
   },
   {
     _id: 'journey-inspection',
@@ -32,6 +42,11 @@ export const buyerJourney: BuyerJourneyStep[] = [
     description: {
       en: 'See the vehicle or goods in Tanzania and check them before handover.',
     },
+    details: [
+      { en: 'See the vehicle or goods in person before handover.' },
+      { en: 'Check the condition and specification against what was agreed.' },
+      { en: '[CONFIRM: where and how inspection takes place]' },
+    ],
   },
   {
     _id: 'journey-handover',
@@ -42,5 +57,10 @@ export const buyerJourney: BuyerJourneyStep[] = [
     description: {
       en: 'Take delivery in Tanzania. We stay in touch for any questions afterwards.',
     },
+    details: [
+      { en: 'Complete payment as agreed and take delivery.' },
+      { en: 'Receive the documents for your purchase. [CONFIRM: which documents are provided]' },
+      { en: 'We stay in touch for any questions afterwards.' },
+    ],
   },
 ];

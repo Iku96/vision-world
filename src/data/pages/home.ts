@@ -4,15 +4,20 @@ export const homePage: HomePage = {
   _id: 'homePage',
   _type: 'homePage',
   hero: {
-    routeFrom: { en: 'South Korea' },
-    routeTo: { en: 'Tanzania' },
-    heading: { en: 'Trucks, vehicles and goods from Korea and beyond, available in Tanzania.' },
-    text: {
-      en: 'Vision World takes ideas and opportunities from around the world and turns them into something useful for Tanzania.',
+    eyebrow: { en: 'International trading and investment' },
+    heading: { en: 'From Korea to Tanzania.' },
+    subheading: {
+      en: 'Trucks, vehicles and quality goods, sourced in Korea and beyond and available in Tanzania.',
     },
-    // Pixabay placeholder until a real Vision World photo is available.
-    image: { src: '/src/assets/images/trucks/scania-truck-2.webp', alt: { en: 'Tractor head parked at sunrise' } },
+    // Pixabay placeholder until a real photo of the Vision World yard is available.
+    image: {
+      src: '/src/assets/images/yard/truck-depot-2.webp',
+      alt: { en: 'Trucks parked in rows at a depot, seen from above' },
+    },
     secondaryCta: { label: { en: 'View stock' }, href: 'stock' },
+    sourcingLabel: { en: 'Now sourcing' },
+    from: { label: { en: 'Korea' }, lat: 37.5, lon: 127 },
+    to: { label: { en: 'Tanzania' }, lat: -6.4, lon: 35 },
   },
   trade: {
     eyebrow: { en: 'What we trade' },
@@ -36,12 +41,10 @@ export const homePage: HomePage = {
     eyebrow: { en: 'About us' },
     heading: { en: 'The bridge between Tanzania and Korea' },
     text: {
-      en: 'Vision World is led by [CEO NAME]. [CEO STORY IN ONE OR TWO SENTENCES].',
+      en: 'Vision World is led by Joseph Makina. [CEO STORY IN ONE OR TWO SENTENCES].',
     },
     quote: { en: '[CEO QUOTE]' },
-    quoteName: '[CEO NAME]',
-    quoteRole: { en: 'CEO' },
-    image: { src: '', alt: { en: 'Portrait of [CEO NAME]' } },
+    image: { src: '', alt: { en: 'Portrait of Joseph Makina' } },
     link: { label: { en: 'Read our story' }, href: 'about' },
   },
   group: {
@@ -49,10 +52,5 @@ export const homePage: HomePage = {
     heading: { en: 'More from Vision, coming soon' },
     intro: { en: 'We are building new divisions to serve Tanzania and the wider region.' },
     link: { label: { en: 'Learn about Vision Group' }, href: 'vision-group' },
-  },
-  cta: {
-    heading: { en: 'Tell us what you need' },
-    text: { en: 'Send us a message on WhatsApp or request a quote. We will get back to you with options.' },
-    quoteLink: { label: { en: 'Request a quote' }, href: 'contact' },
   },
 };

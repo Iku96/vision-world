@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { getDivisions, getUi, getVisionGroupPage } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = getVisionGroupPage();
+const ui = getUi();
+const divisions = getDivisions();
+---
+
+<BaseLayout title={t(page.seo.title, locale)} description={t(page.seo.description, locale)}>
+  <PageHeader
+    locale={locale}
+    eyebrow={t(page.header.eyebrow, locale)}
+    heading={t(page.header.heading, locale)}
+    intro={t(page.header.intro, locale)}
+  />
+
+  <section class="bg-white py-14 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-extrabold sm:text-4xl">{t(page.intro.heading, locale)}</h2>
+        <div class="mt-4 space-y-4 text-lg leading-relaxed text-slate-700">
+          {page.intro.paragraphs.map((p) => <p>{t(p, locale)}</p>)}
+        </div>
+      </div>
+
+      <h2 class="mt-14 text-2xl font-extrabold">{t(page.divisionsHeading, locale)}</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          divisions.map((division) => (
+            <li class="flex flex-col rounded-md border border-silver border-t-4 border-t-navy p-6">
+              {division.status === 'comingSoon' && (
+                <span class="self-start rounded bg-orange-light px-2 py-0.5 text-xs font-bold tracking-wider text-ink uppercase">
+                  {t(ui.comingSoon, locale)}
+                </span>
+              )}
+              <h3 class="mt-4 text-xl leading-snug font-bold">{division.name}</h3>
+              <p class="mt-2 text-slate-700">{t(division.description, locale)}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaSection locale={locale} />
+</BaseLayout>

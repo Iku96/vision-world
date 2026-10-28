@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ListingCard from '../components/ListingCard.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { getCategories, getCategoryById, getListings, getStockPage, getUi } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+import type { ListingStatus } from '../data/types';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = getStockPage();
+const ui = getUi();
+const listings = getListings();
+const categories = getCategories().filter((c) => listings.some((l) => l.category._ref === c._id));
+const statuses: { value: ListingStatus; label: string }[] = [
+  { value: 'available', label: t(ui.statusAvailable, locale) },
+  { value: 'incoming', label: t(ui.statusIncoming, locale) },
+  { value: 'sold', label: t(ui.statusSold, locale) },
+];
+const countTemplate = t(ui.filterCount, locale);
+const selectClass =
+  'mt-1 block min-h-11 w-full rounded-md border border-silver bg-white px-3 text-base text-ink focus:border-globe-dark';
+---
+
+<BaseLayout title={t(page.seo.title, locale)} description={t(page.seo.description, locale)}>
+  <PageHeader
+    locale={locale}
+    eyebrow={t(page.header.eyebrow, locale)}
+    heading={t(page.header.heading, locale)}
+    intro={t(page.header.intro, locale)}
+  />
+
+  <section class="bg-mist py-10 lg:py-14">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Filters work without a server: listings carry data attributes and a small script hides non-matches. -->
+      <form class="grid gap-4 rounded-md bg-white p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end sm:p-5" data-stock-filters>
+        <label class="block text-sm font-semibold">
+          {t(ui.filterCategory, locale)}
+          <select name="category" class={selectClass}>
+            <option value="">{t(ui.filterAllCategories, locale)}</option>
+            {categories.map((c) => <option value={c.slug.current}>{t(c.title, locale)}</option>)}
+          </select>
+        </label>
+        <label class="block text-sm font-semibold">
+          {t(ui.filterStatus, locale)}
+          <select name="status" class={selectClass}>
+            <option value="">{t(ui.filterAllStatuses, locale)}</option>
+            {statuses.map((s) => <option value={s.value}>{s.label}</option>)}
+          </select>
+        </label>
+        <button
+          type="reset"
+          class="min-h-11 rounded-md border-2 border-navy px-5 font-semibold text-navy transition-colors hover:bg-navy hover:text-white"
+        >
+          {t(ui.filterReset, locale)}
+        </button>
+      </form>
+
+      <p class="mt-6 text-sm font-semibold text-slate-700" aria-live="polite" data-stock-count data-template={countTemplate}>
+        {countTemplate.replace('{count}', String(listings.length))}
+      </p>
+
+      <ul class="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6" data-stock-list>
+        {
+          listings.map((listing) => (
+            <li data-category={getCategoryById(listing.category._ref)?.slug.current} data-status={listing.status}>
+              <ListingCard listing={listing} locale={locale} />
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-6 hidden rounded-md bg-white p-6" data-stock-empty>
+        <p class="text-lg text-slate-700">{t(ui.filterEmpty, locale)}</p>
+        <WhatsAppButton locale={locale} class="mt-4 px-6" />
+      </div>
+
+      <p class="mt-10 text-sm text-slate-600">{t(page.note, locale)}</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-stock-filters]');
+  const items = [...document.querySelectorAll<HTMLElement>('[data-stock-list] > li')];
+  const count = document.querySelector<HTMLElement>('[data-stock-count]');
+  const empty = document.querySelector<HTMLElement>('[data-stock-empty]');
+
+  if (form && count && empty) {
+    const category = form.elements.namedItem('category') as HTMLSelectElement;
+    const status = form.elements.namedItem('status') as HTMLSelectElement;
+
+    const apply = () => {
+      let shown = 0;
+      for (const item of items) {
+        const match =
+          (!category.value || item.dataset.category === category.value) &&
+          (!status.value || item.dataset.status === status.value);
+        item.hidden = !match;
+        if (match) shown++;
+      }
+      count.textContent = count.dataset.template!.replace('{count}', String(shown));
+      empty.classList.toggle('hidden', shown > 0);
+
+      // Keep the filters in the URL so filtered views can be shared and linked to.
+      const url = new URL(location.href);
+      for (const [key, el] of [['category', category], ['status', status]] as const) {
+        if (el.value) url.searchParams.set(key, el.value);
+        else url.searchParams.delete(key);
+      }
+      history.replaceState(null, '', url);
+    };
+
+    // Start from ?category= and ?status= when present (e.g. links from category pages).
+    const params = new URLSearchParams(location.search);
+    for (const [key, el] of [['category', category], ['status', status]] as const) {
+      const value = params.get(key);
+      if (value && [...el.options].some((o) => o.value === value)) el.value = value;
+    }
+
+    form.addEventListener('change', apply);
+    form.addEventListener('reset', () => setTimeout(apply));
+    form.addEventListener('submit', (e) => e.preventDefault());
+    apply();
+  }
+</script>

@@ -1,10 +1,15 @@
 ---
-import Icon from '../Icon.astro';
+// Home hero: yard photo with navy gradient, a dotted globe with Korea and Tanzania highlighted,
+// and a "Now sourcing" split-flap board. Each board flip sends a labelled pulse from Korea
+// to Tanzania on the globe.
 import Photo from '../Photo.astro';
-import WhatsAppButton from '../WhatsAppButton.astro';
-import { getHomePage } from '../../data';
+import HeroCtas from './HeroCtas.astro';
+import { HERO_HEIGHT } from './heroHeight';
+import { getCategories, getHomePage } from '../../data';
 import { localizePath, t } from '../../i18n/utils';
 import type { Locale } from '../../i18n/config';
+import type { RoutePoint } from '../../data/types';
+import globe from '../../data/geo/globe.json';
 
 interface Props {
   locale: Locale;
@@ -12,40 +17,441 @@ interface Props {
 
 const { locale } = Astro.props;
 const { hero } = getHomePage();
+const items = getCategories().map((c) => ({
+  label: t(c.title, locale).toUpperCase(),
+  href: localizePath(`what-we-trade/${c.slug.current}`, locale),
+}));
+// Fixed cell count (longest label) so the board never changes width.
+const cells = Math.max(...items.map((i) => i.label.length));
+const first = items[0].label.padEnd(cells, ' ');
+const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), lat: p.lat, lon: p.lon });
 ---
 
-<section class="on-dark bg-navy text-white">
-  <div class="mx-auto grid max-w-7xl gap-10 px-4 pt-10 pb-12 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-14 lg:px-8 lg:py-20">
-    <div>
-      <p class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-orange-light">
-        <span>{t(hero.routeFrom, locale)}</span>
-        <span class="relative h-0.5 w-12 bg-orange" aria-hidden="true">
-          <span class="absolute -top-[3px] -right-1 size-2 rounded-full bg-orange"></span>
-        </span>
-        <span>{t(hero.routeTo, locale)}</span>
-      </p>
-      <h1 class="mt-5 text-4xl leading-[1.05] font-extrabold text-balance text-white sm:text-5xl lg:text-6xl">
+<section class="on-dark relative isolate overflow-hidden bg-navy text-white">
+  <script type="application/json" id="globe-data" set:html={JSON.stringify(globe)} />
+
+  <div
+    class:list={['mx-auto flex max-w-7xl flex-col px-4 pb-8 sm:px-6 lg:justify-center lg:px-8 lg:py-16', HERO_HEIGHT]}
+  >
+    <!-- Photo + globe: in the flow on phones (takes the leftover height), right side on desktop. -->
+    <div class="relative -mx-4 min-h-0 flex-1 overflow-hidden sm:-mx-6 lg:absolute lg:inset-0 lg:left-[30%] lg:-z-10 lg:mx-0">
+      <div class="absolute inset-0 will-change-transform" data-parallax>
+        <Photo
+          image={hero.image}
+          locale={locale}
+          ratio="3 / 2"
+          sizes="(min-width: 1024px) 70vw, 100vw"
+          priority
+          class="absolute inset-0 h-full object-center"
+        />
+      </div>
+      <div class="hero-shade absolute inset-0" aria-hidden="true"></div>
+      <canvas
+        class="absolute inset-0 h-full w-full"
+        aria-hidden="true"
+        data-globe
+        data-from={endpoint(hero.from)}
+        data-to={endpoint(hero.to)}></canvas>
+    </div>
+
+    <div class="relative max-w-xl pt-2 lg:pt-0">
+      <p class="text-xs font-semibold tracking-[0.18em] text-orange-light uppercase sm:text-sm">{t(hero.eyebrow, locale)}</p>
+      <h1 class="mt-3 text-[2.5rem] leading-[1.02] font-extrabold text-white sm:mt-4 sm:text-6xl lg:text-7xl">
         {t(hero.heading, locale)}
       </h1>
-      <p class="mt-5 max-w-xl text-lg leading-relaxed text-white/85">{t(hero.text, locale)}</p>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <WhatsAppButton locale={locale} class="px-6 py-3 text-base" />
+
+      <!-- Split-flap board. Links to the category on show; screen readers get the full list. -->
+      <div class="mt-4 sm:mt-6">
+        <p class="text-xs font-semibold tracking-wider text-white/70 uppercase">{t(hero.sourcingLabel, locale)}</p>
+        <ul class="sr-only">
+          {items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+        </ul>
         <a
-          href={localizePath(hero.secondaryCta.href, locale)}
-          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-white/40 px-6 py-3 font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
+          href={items[0].href}
+          tabindex="-1"
+          aria-hidden="true"
+          class="mt-2 inline-flex min-h-11 items-center gap-[3px]"
+          data-flap={JSON.stringify(items)}
         >
-          {t(hero.secondaryCta.label, locale)}
-          <Icon name="arrowRight" class="size-4" />
+          {
+            [...first].map((ch) => (
+              <span
+                class:list={[
+                  'flap grid h-[1.6em] w-[0.95em] place-items-center rounded-[3px] font-heading text-[0.95rem] font-bold sm:text-xl',
+                  ch === ' ' && 'is-blank',
+                ]}
+              >
+                {ch}
+              </span>
+            ))
+          }
         </a>
       </div>
+
+      <p class="mt-4 max-w-md text-base leading-relaxed text-white/90 sm:mt-6 sm:text-lg">{t(hero.subheading, locale)}</p>
+      <HeroCtas locale={locale} class="mt-5 sm:mt-8" />
     </div>
-    <Photo
-      image={hero.image}
-      locale={locale}
-      ratio="3 / 2"
-      sizes="(min-width: 1280px) 580px, (min-width: 1024px) 45vw, 100vw"
-      priority
-      class="rounded-md"
-    />
   </div>
 </section>
+
+<style>
+  /* Phones: tint the photo for the globe, fade to navy at the bottom for the text.
+     Desktop: solid navy on the left blending into a tinted photo. */
+  .hero-shade {
+    background:
+      linear-gradient(to top, #0b1f73 0%, transparent 45%),
+      rgb(8 23 87 / 0.55);
+  }
+
+  @media (min-width: 64rem) {
+    .hero-shade {
+      background:
+        linear-gradient(to right, #0b1f73 0%, rgb(11 31 115 / 0.7) 30%, rgb(8 23 87 / 0.45) 70%, rgb(8 23 87 / 0.35) 100%),
+        linear-gradient(to top, rgb(8 23 87 / 0.5), transparent 40%);
+    }
+  }
+
+  .flap {
+    background: #081757;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+    color: #fff;
+  }
+
+  .flap.is-blank {
+    background: rgb(255 255 255 / 0.06);
+    box-shadow: none;
+  }
+
+  .flap.flipping {
+    animation: flap 90ms linear;
+  }
+
+  @keyframes flap {
+    from { transform: rotateX(70deg); }
+    to { transform: rotateX(0); }
+  }
+</style>
+
+<script>
+  type Vec = [number, number, number];
+  type Endpoint = { label: string; lat: number; lon: number };
+  type GlobeData = {
+    step: number;
+    land: number[][];
+    countries: Record<'kr' | 'tz', { dots: number[]; outline: number[] }>;
+  };
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DEG = Math.PI / 180;
+  const FLIGHT_MS = 2600;
+
+  const vec = (lat: number, lon: number): Vec => [
+    Math.cos(lat * DEG) * Math.cos(lon * DEG),
+    Math.sin(lat * DEG),
+    Math.cos(lat * DEG) * Math.sin(lon * DEG),
+  ];
+
+  function slerp(a: Vec, b: Vec, t: number): Vec {
+    const omega = Math.acos(Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]));
+    const s = Math.sin(omega) || 1;
+    const k1 = Math.sin((1 - t) * omega) / s;
+    const k2 = Math.sin(t * omega) / s;
+    return [a[0] * k1 + b[0] * k2, a[1] * k1 + b[1] * k2, a[2] * k1 + b[2] * k2];
+  }
+
+  /** Great-circle arc lifted off the surface. */
+  const arc = (a: Vec, b: Vec, lift: number, steps: number): Vec[] =>
+    Array.from({ length: steps + 1 }, (_, i) => {
+      const t = i / steps;
+      const p = slerp(a, b, t);
+      const s = 1 + lift * Math.sin(Math.PI * t);
+      return [p[0] * s, p[1] * s, p[2] * s];
+    });
+
+  function initGlobe(canvas: HTMLCanvasElement, data: GlobeData) {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const from: Endpoint = JSON.parse(canvas.dataset.from!);
+    const to: Endpoint = JSON.parse(canvas.dataset.to!);
+
+    // Expand run-length land rows into dots.
+    const land: Vec[] = [];
+    for (const [li, ...runs] of data.land) {
+      const lat = -90 + li * data.step;
+      const lonStep = data.step / Math.cos(lat * DEG);
+      for (let k = 0; k < runs.length; k += 2) {
+        for (let i = runs[k]; i < runs[k] + runs[k + 1]; i++) land.push(vec(lat, -180 + i * lonStep));
+      }
+    }
+    const country = (c: { dots: number[]; outline: number[] }) => ({
+      dots: Array.from({ length: c.dots.length / 2 }, (_, i) => vec(c.dots[2 * i], c.dots[2 * i + 1])),
+      outline: Array.from({ length: c.outline.length / 2 }, (_, i) => vec(c.outline[2 * i + 1], c.outline[2 * i])),
+      glowAt: -Infinity,
+    });
+    const kr = country(data.countries.kr);
+    const tz = country(data.countries.tz);
+    const route = arc(vec(from.lat, from.lon), vec(to.lat, to.lon), 0.3, 140);
+    const pulses: { start: number; label: string }[] = [];
+
+    const centerLon = (from.lon + to.lon) / 2;
+    const tilt = 14 * DEG;
+    let w = 0, h = 0, cx = 0, cy = 0, R = 0, show = true;
+
+    function layout() {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      R = Math.min(w * 0.4, h * 0.4);
+      cx = w >= 600 ? w * 0.56 : w * 0.5;
+      cy = h * 0.5;
+      show = R >= 45;
+    }
+
+    function project(v: Vec, theta: number): Vec {
+      const x1 = v[0] * Math.cos(theta) - v[2] * Math.sin(theta);
+      const z1 = v[0] * Math.sin(theta) + v[2] * Math.cos(theta);
+      const y2 = v[1] * Math.cos(tilt) - z1 * Math.sin(tilt);
+      const z2 = v[1] * Math.sin(tilt) + z1 * Math.cos(tilt);
+      return [cx - R * x1, cy - R * y2, z2];
+    }
+
+    const hidden = (p: Vec) => p[2] < 0 && Math.hypot(p[0] - cx, p[1] - cy) < R;
+
+    function path(points: Vec[], theta: number, close = false) {
+      const c = ctx!;
+      c.beginPath();
+      let pen = false;
+      for (const v of points) {
+        const p = project(v, theta);
+        if (hidden(p)) {
+          pen = false;
+          continue;
+        }
+        if (pen) c.lineTo(p[0], p[1]);
+        else c.moveTo(p[0], p[1]);
+        pen = true;
+      }
+      if (close && pen) c.closePath();
+    }
+
+    function drawCountry(cn: typeof kr, theta: number, time: number) {
+      const c = ctx!;
+      const g = reduce ? 0.6 : Math.max(0, 1 - (time - cn.glowAt) / 1400);
+      c.fillStyle = '#f6a35c';
+      for (const d of cn.dots) {
+        const p = project(d, theta);
+        if (p[2] <= 0) continue;
+        c.globalAlpha = (0.55 + 0.45 * g) * (0.4 + 0.6 * p[2]);
+        c.fillRect(p[0] - 0.9, p[1] - 0.9, 1.8, 1.8);
+      }
+      c.globalAlpha = 1;
+      c.save();
+      c.strokeStyle = `rgba(246,163,92,${0.55 + 0.45 * g})`;
+      c.lineWidth = 1 + g;
+      c.shadowColor = '#f07a1a';
+      c.shadowBlur = 14 * g;
+      path(cn.outline, theta, true);
+      c.stroke();
+      c.restore();
+    }
+
+    function draw(time: number) {
+      const c = ctx!;
+      c.clearRect(0, 0, w, h);
+      if (!show) return;
+      const sway = reduce ? 0 : Math.sin(time * 0.0001) * 8;
+      const theta = (90 - (centerLon + sway)) * DEG;
+
+      // Dark halo so the globe stands in front of the photo.
+      const halo = c.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.45);
+      halo.addColorStop(0, 'rgba(8,23,87,0.8)');
+      halo.addColorStop(1, 'rgba(8,23,87,0)');
+      c.fillStyle = halo;
+      c.fillRect(0, 0, w, h);
+
+      // Sphere body (nearly opaque, so the photo doesn't show through) and rim.
+      const body = c.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
+      body.addColorStop(0, 'rgb(22,52,150)');
+      body.addColorStop(1, 'rgb(6,18,70)');
+      c.fillStyle = body;
+      c.beginPath();
+      c.arc(cx, cy, R, 0, Math.PI * 2);
+      c.fill();
+      c.strokeStyle = 'rgba(120,180,235,0.4)';
+      c.lineWidth = 1;
+      c.stroke();
+
+      // Land on the visible side, brighter towards the centre.
+      c.fillStyle = '#a9d0f2';
+      const s = Math.max(1.1, R / 200);
+      for (const d of land) {
+        const p = project(d, theta);
+        if (p[2] <= 0) continue;
+        c.globalAlpha = 0.3 + 0.65 * p[2];
+        c.fillRect(p[0] - s / 2, p[1] - s / 2, s, s);
+      }
+      c.globalAlpha = 1;
+
+      drawCountry(kr, theta, time);
+      drawCountry(tz, theta, time);
+
+      // The route, always visible but quiet.
+      c.strokeStyle = reduce ? '#f6a35c' : 'rgba(246,163,92,0.4)';
+      c.lineWidth = reduce ? 2 : 1.5;
+      path(route, theta);
+      c.stroke();
+
+      // Pulses: a bright trail with the category label riding along.
+      c.font = '700 11px Inter, system-ui, sans-serif';
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i];
+        const t = (time - p.start) / FLIGHT_MS;
+        if (t >= 1) {
+          tz.glowAt = time;
+          pulses.splice(i, 1);
+          continue;
+        }
+        const head = Math.round(t * (route.length - 1));
+        const tail = Math.max(0, head - 28);
+        c.save();
+        c.strokeStyle = '#f6a35c';
+        c.lineWidth = 2.5;
+        c.shadowColor = '#f07a1a';
+        c.shadowBlur = 16;
+        path(route.slice(tail, head + 1), theta);
+        c.stroke();
+        const hp = project(route[head], theta);
+        c.fillStyle = '#fff';
+        c.beginPath();
+        c.arc(hp[0], hp[1], 3.5, 0, Math.PI * 2);
+        c.fill();
+        c.restore();
+        // Label appears once the pulse has left Korea, so it doesn't collide with the country label.
+        if (t > 0.12 && t < 0.88) {
+          c.fillStyle = '#ffd7b0';
+          c.textAlign = 'center';
+          c.fillText(p.label, hp[0], hp[1] - 10);
+        }
+      }
+
+      // Country labels.
+      c.font = '600 12px Inter, system-ui, sans-serif';
+      c.fillStyle = '#fff';
+      for (const [v, label] of [
+        [vec(from.lat + 4, from.lon), from.label],
+        [vec(to.lat - 9, to.lon), to.label],
+      ] as const) {
+        const p = project(v, theta);
+        c.textAlign = 'center';
+        c.fillText(label.toUpperCase(), p[0], p[1]);
+      }
+    }
+
+    let running = false;
+    let frame = 0;
+    const loop = (time: number) => {
+      draw(time);
+      if (running) frame = requestAnimationFrame(loop);
+    };
+
+    layout();
+    new ResizeObserver(() => {
+      layout();
+      draw(performance.now());
+    }).observe(canvas);
+
+    if (reduce) {
+      draw(0);
+      return;
+    }
+
+    document.addEventListener('hero:sourcing', (e) => {
+      const now = performance.now();
+      pulses.push({ start: now, label: (e as CustomEvent<string>).detail });
+      kr.glowAt = now;
+    });
+
+    // Only animate while the hero is on screen.
+    new IntersectionObserver(([entry]) => {
+      running = entry.isIntersecting;
+      cancelAnimationFrame(frame);
+      if (running) frame = requestAnimationFrame(loop);
+    }).observe(canvas);
+  }
+
+  function initBoard(board: HTMLAnchorElement) {
+    const items: { label: string; href: string }[] = JSON.parse(board.dataset.flap!);
+    const cells = [...board.children] as HTMLElement[];
+    const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const announce = (label: string) => document.dispatchEvent(new CustomEvent('hero:sourcing', { detail: label }));
+    let index = 0;
+
+    const setCell = (cell: HTMLElement, ch: string) => {
+      cell.textContent = ch;
+      cell.classList.toggle('is-blank', ch === ' ');
+      cell.classList.remove('flipping');
+      void cell.offsetWidth; // restart the flip animation
+      cell.classList.add('flipping');
+    };
+
+    const show = (item: { label: string; href: string }) => {
+      const target = item.label.padEnd(cells.length, ' ');
+      board.href = item.href;
+      cells.forEach((cell, i) => {
+        const flips = 3 + Math.floor(Math.random() * 4);
+        for (let f = 0; f <= flips; f++) {
+          setTimeout(() => {
+            const last = f === flips;
+            setCell(cell, last || target[i] === ' ' ? target[i] : glyphs[Math.floor(Math.random() * 26)]);
+          }, i * 35 + f * 70);
+        }
+      });
+      announce(item.label);
+    };
+
+    // First pulse for the word already on the board, then cycle while visible.
+    setTimeout(() => announce(items[0].label), 600);
+    let timer = 0;
+    new IntersectionObserver(([entry]) => {
+      clearInterval(timer);
+      if (entry.isIntersecting)
+        timer = window.setInterval(() => {
+          index = (index + 1) % items.length;
+          show(items[index]);
+        }, 3600);
+    }).observe(board);
+  }
+
+  function initParallax(layer: HTMLElement) {
+    // The photo layer moves at a quarter of the scroll speed inside its clipped frame.
+    let queued = false;
+    const update = () => {
+      queued = false;
+      layer.style.transform = `translate3d(0, ${Math.min(scrollY, innerHeight) * 0.25}px, 0)`;
+    };
+    addEventListener(
+      'scroll',
+      () => {
+        if (!queued) {
+          queued = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true },
+    );
+  }
+
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-globe]');
+  const data = document.getElementById('globe-data')?.textContent;
+  if (canvas && data) initGlobe(canvas, JSON.parse(data));
+
+  if (!reduce) {
+    const board = document.querySelector<HTMLAnchorElement>('[data-flap]');
+    if (board) initBoard(board);
+    const layer = document.querySelector<HTMLElement>('[data-parallax]');
+    if (layer) initParallax(layer);
+  }
+</script>

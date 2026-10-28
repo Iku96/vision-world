@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { getCategories, getWhatWeTradePage } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = getWhatWeTradePage();
+const categories = getCategories();
+---
+
+<BaseLayout title={t(page.seo.title, locale)} description={t(page.seo.description, locale)}>
+  <PageHeader
+    locale={locale}
+    eyebrow={t(page.header.eyebrow, locale)}
+    heading={t(page.header.heading, locale)}
+    intro={t(page.header.intro, locale)}
+  />
+
+  <section class="bg-white py-14 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <ul class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-6">
+        {
+          categories.map((category) => (
+            <li>
+              <CategoryCard category={category} locale={locale} headingLevel="h2" />
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-12 flex flex-col gap-5 rounded-md border-l-4 border-orange bg-mist p-6 sm:flex-row sm:items-center sm:justify-between lg:p-8">
+        <div>
+          <h2 class="text-2xl font-extrabold">{t(page.ask.title, locale)}</h2>
+          <p class="mt-2 text-slate-700">{t(page.ask.text, locale)}</p>
+        </div>
+        <WhatsAppButton locale={locale} class="shrink-0 px-6" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

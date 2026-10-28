@@ -31,4 +31,21 @@ export const ui = {
   similarMessage: { en: 'Hello Vision World, I am looking for something similar to: {title}' },
   comingSoon: { en: 'Coming soon' },
   step: { en: 'Step' },
+  previewBanner: { en: 'Preview site. Content and images are placeholders under review.' },
+  breadcrumb: { en: 'Breadcrumb' },
+  home: { en: 'Home' },
+  viewDetails: { en: 'View details' },
+  /** {item} is replaced with what the visitor is looking for. */
+  lookingForMessage: { en: 'Hello Vision World, I am looking for: {item}' },
+  askAboutCategory: { en: 'Ask about {item}' },
+  filterCategory: { en: 'Category' },
+  filterStatus: { en: 'Status' },
+  filterAllCategories: { en: 'All categories' },
+  filterAllStatuses: { en: 'All' },
+  filterReset: { en: 'Show all' },
+  /** {count} is replaced with the number of listings shown. */
+  filterCount: { en: 'Showing {count} listings' },
+  filterEmpty: { en: 'No listings match these filters right now. Ask us on WhatsApp and we will look for it.' },
+  price: { en: 'Price' },
+  galleryLabel: { en: 'Photos' },
 } satisfies Record<string, LocalizedString>;

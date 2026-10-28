@@ -5,7 +5,8 @@
 // Additive: existing files are never overwritten, images already in credits.json
 // or listed in scripts/pixabay-exclude.json are skipped, and new credits are merged in.
 //
-// Usage: npm run fetch-images   (requires PIXABAY_API_KEY in .env)
+// Usage: npm run fetch-images              all categories (requires PIXABAY_API_KEY in .env)
+//        npm run fetch-images -- yard      only the named categories
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -23,7 +24,7 @@ const MAX_WIDTH = 1600;
 // Search terms per category. Earlier terms are recorded in credits.json.
 const CATEGORIES = {
   trucks: ['semi truck', 'tractor unit', 'dump truck', 'truck fleet'],
-  vehicles: ['car dealership', 'used car lot'],
+  vehicles: ['suv car', 'suv side view', '4x4 vehicle'],
   'spare-parts': ['car engine parts', 'brake disc', 'truck engine'],
   electronics: ['fridge appliance', 'home appliances', 'radio'],
   general: ['warehouse shelves', 'logistics warehouse', 'cargo loading'],
@@ -31,6 +32,7 @@ const CATEGORIES = {
   clothing: ['clothes rack', 'second hand clothes'],
   bags: ['travel bag', 'leather duffel bag'],
   bicycles: ['vintage bicycle'],
+  yard: ['truck yard', 'truck parking lot', 'truck depot', 'container terminal trucks', 'port container yard'],
 };
 
 // Pixabay tags that suggest identifiable people or visible brand logos.
@@ -99,7 +101,14 @@ const exclude = await readJson(EXCLUDE_FILE, []);
 const seen = new Set([...credits.map((c) => c.pixabayId), ...exclude.map((e) => e.pixabayId)]);
 let added = 0;
 
-for (const [category, terms] of Object.entries(CATEGORIES)) {
+const only = process.argv.slice(2);
+const unknown = only.filter((c) => !(c in CATEGORIES));
+if (unknown.length) {
+  console.error(`Unknown categories: ${unknown.join(', ')}. Known: ${Object.keys(CATEGORIES).join(', ')}`);
+  process.exit(1);
+}
+
+for (const [category, terms] of Object.entries(CATEGORIES).filter(([c]) => !only.length || only.includes(c))) {
   const dir = path.join(OUT_DIR, category);
   await mkdir(dir, { recursive: true });
 

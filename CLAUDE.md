@@ -43,10 +43,14 @@ Vision Beauty & Cosmetics, Vision Logistics, Vision Consulting (Asia-Africa trad
 | Home | `/` | Organization JSON-LD lives here |
 | About | `/about` | CEO story |
 | What We Trade | `/what-we-trade` | Categories from `src/data/categories.ts` |
-| Stock | `/stock` | Listings with status: `available` / `sold` / `incoming`, and a price in TZS or "Price on request" |
+| Category | `/what-we-trade/[slug]` | Description, examples, listings in that category, WhatsApp CTA |
+| Stock | `/stock` | Listings with status: `available` / `sold` / `incoming`, and a price in TZS or "Price on request". Category and status filters, also via `?category=` and `?status=` |
+| Listing | `/stock/[slug]` | Gallery, specs table, price, WhatsApp CTA prefilled with the listing name |
 | How We Work | `/how-we-work` | Buyer journey: Sourcing in Korea > Import > Inspection > Handover |
 | Vision Group | `/vision-group` | Divisions, all "Coming soon" for now |
 | Contact / Request a Quote | `/contact` | WhatsApp first, form second |
+
+Plus a styled `404` page. Contact links can preselect the form category with `/contact?category=<slug>`.
 
 Swahili versions live at the same paths under `/sw/` (for example `/sw/about`) once translated.
 
@@ -75,7 +79,7 @@ Components never hardcode copy. All text, links, phone numbers and listings come
 - One file per document type: `siteSettings.ts`, `navigation.ts`, `ui.ts`, `buyerJourney.ts`, `categories.ts`, `listings.ts`, `divisions.ts` (add page-level copy files as needed).
 - Shape documents the Sanity way: `_id`, `_type`, `slug: { current: string }`, image fields as objects (`{ src, alt }`), rich text kept simple for now. All user-facing text is `LocalizedString`.
 - Access data through getter functions in `src/data/index.ts` (for example `getListings()`, `getSiteSettings()`) rather than importing arrays directly. These become the Sanity queries later.
-- `siteSettings` holds: company name, tagline, WhatsApp number, default WhatsApp message, email, phone, address, social links, default SEO (title template, description, OG image) and the `noindex` flag.
+- `siteSettings` holds: company name, CEO name and role, tagline, WhatsApp number, default WhatsApp message, email, phone, address, social links, default SEO (title template, description, OG image) and the `noindex` flag.
 - Listing status is a union type: `'available' | 'sold' | 'incoming'`.
 - Listing price is a discriminated union: `{ type: 'fixed'; amountTZS: number }` or `{ type: 'onRequest' }`. Format TZS with `Intl.NumberFormat`. Never invent prices; use `onRequest` when unknown.
 
@@ -97,6 +101,8 @@ Serious, trustworthy B2B trading company. Clean, bold, modern. Not flashy.
 
 ### Layout
 
+- Preview banner above the header on every page while `siteSettings.previewBanner` is true. When turning it off, also remove the banner allowance in `src/components/home/heroHeight.ts`.
+- Home hero: yard photo with navy gradient, dotted globe (Korea and Tanzania highlighted) and a "Now sourcing" split-flap board; each flip sends a pulse along the Korea to Tanzania arc. Fits one phone screen with buttons visible.
 - Sticky white header: logo, nav (desktop), language switcher, WhatsApp button (desktop). Hamburger menu below `lg`.
 - Below `lg`, a fixed bottom bar holds WhatsApp (primary) and Request a quote. The body gets bottom padding so it never covers content.
 - Navy footer with contact details and page links.
@@ -142,8 +148,11 @@ Do not present these as fact on the site until confirmed. Keep the current wordi
 - **Clearing:** same as shipping (Vision Clearing & Forwarding is a future division).
 - **Inspection:** whether buyers can inspect goods in Tanzania before handover, as the current How We Work copy implies.
 - **Handover:** how and where delivery or collection happens in Tanzania.
-- **CEO details:** name, story, quote, portrait photo.
-- **Contact details:** WhatsApp number (currently `+255XXXXXXXXX`), phone, email, office address, opening hours.
+- **CEO details:** ~~name~~ received: Joseph Makina (in `siteSettings.ceo`). Still needed: story, quote, portrait photo.
+- **Contact details:** WhatsApp number (currently `+255XXXXXXXXX`), phone, email, opening hours. Address: ~~building~~ received: Noble Centre, Makumbusho, Dar es Salaam. Still needed: floor and office number.
+- **Copy in `[CONFIRM: ...]` brackets:** How We Work step details and FAQ answers (payment, inspection, timelines, documents, who you sell to), category examples, company history.
+- **About page values:** the four values are general wording written for review, not supplied by the client.
+- **Sample listings:** all nine are placeholders. Replace with real stock.
 - **Official company name:** legal or registered name for the footer and Organization JSON-LD.
 - **Price display preference:** whether to show TZS prices on listings or always "Price on request".
 
@@ -152,10 +161,12 @@ Do not present these as fact on the site until confirmed. Keep the current wordi
 - Clear, confident, plain English.
 - **No em dashes.** Use commas, full stops, or colons.
 - **No fake testimonials. No invented numbers** (years in business, units sold, clients served, etc.).
-- Where information is missing, use obvious placeholders in square brackets: `[CEO NAME]`, `[OFFICE ADDRESS]`, `[YEAR FOUNDED]`. Never fill gaps with plausible-sounding made-up facts.
+- Where information is missing, use obvious placeholders in square brackets: `[CEO QUOTE]`, `[OFFICE ADDRESS]`, `[YEAR FOUNDED]`. Never fill gaps with plausible-sounding made-up facts.
 
 ## Commands
 
 - `npm run dev` (or `astro dev --background`, see AGENTS.md)
 - `npm run build` and `npm run preview`
-- `npx astro check` for type checking
+- `npm run check` (astro check) for type checking, including `.astro` files
+- `npm run build && npm run check:links` checks every internal link, asset and `#anchor` in `dist/`
+- `node scripts/build-globe-data.mjs` regenerates `src/data/geo/globe.json` (hero globe land dots and the Korea and Tanzania shapes, from Natural Earth via `world-atlas`)

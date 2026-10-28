@@ -30,6 +30,10 @@ export interface SiteSettings {
   _type: 'siteSettings';
   companyName: string;
   tagline: LocalizedString;
+  ceo: {
+    name: string;
+    role: LocalizedString;
+  };
   description: LocalizedString;
   logo: ImageRef;
   contact: {
@@ -39,7 +43,15 @@ export interface SiteSettings {
     phone: string;
     email: string;
     address: LocalizedString;
+    /** Search text for the Google Maps embed. */
+    mapQuery: string;
     hours: LocalizedString;
+  };
+  /** Closing call to action shown at the end of most pages. */
+  cta: {
+    heading: LocalizedString;
+    text: LocalizedString;
+    quoteLink: Link;
   };
   social: { platform: string; url: string }[];
   seo: {
@@ -49,6 +61,8 @@ export interface SiteSettings {
   };
   /** Demo phase: adds robots noindex to every page. */
   noindex: boolean;
+  /** Review phase: shows the "preview site" banner on every page. */
+  previewBanner: boolean;
 }
 
 export interface Navigation {
@@ -64,6 +78,8 @@ export interface BuyerJourneyStep {
   order: number;
   title: LocalizedString;
   description: LocalizedString;
+  /** Extra detail for the How We Work page. */
+  details: LocalizedString[];
   icon: IconName;
 }
 
@@ -73,6 +89,10 @@ export interface Category {
   slug: Slug;
   title: LocalizedString;
   description: LocalizedString;
+  /** Longer copy for the category page, one string per paragraph. */
+  body: LocalizedString[];
+  /** What we can source in this category. */
+  examples: LocalizedString[];
   image: ImageRef;
   order: number;
 }
@@ -107,29 +127,50 @@ export interface HomePage {
   _id: 'homePage';
   _type: 'homePage';
   hero: {
-    routeFrom: LocalizedString;
-    routeTo: LocalizedString;
+    eyebrow: LocalizedString;
     heading: LocalizedString;
-    text: LocalizedString;
+    subheading: LocalizedString;
+    /** Background photo behind the globe. */
     image: ImageRef;
     secondaryCta: Link;
+    /** Label before the split-flap category board. */
+    sourcingLabel: LocalizedString;
+    from: RoutePoint;
+    to: RoutePoint;
   };
   trade: SectionCopy;
   stock: SectionCopy;
   howWeWork: SectionCopy;
   about: SectionCopy & {
     text: LocalizedString;
+    /** Attributed to siteSettings.ceo. */
     quote: LocalizedString;
-    quoteName: string;
-    quoteRole: LocalizedString;
     image: ImageRef;
   };
   group: SectionCopy;
-  cta: {
-    heading: LocalizedString;
-    text: LocalizedString;
-    quoteLink: Link;
-  };
+}
+
+/** A place on the hero globe. */
+export interface RoutePoint {
+  label: LocalizedString;
+  lat: number;
+  lon: number;
+}
+
+export interface PageSeo {
+  title: LocalizedString;
+  description: LocalizedString;
+}
+
+export interface PageHeaderCopy {
+  eyebrow: LocalizedString;
+  heading: LocalizedString;
+  intro: LocalizedString;
+}
+
+export interface FaqItem {
+  question: LocalizedString;
+  answer: LocalizedString;
 }
 
 export interface Division {
@@ -140,4 +181,112 @@ export interface Division {
   description: LocalizedString;
   status: 'comingSoon' | 'active';
   order: number;
+}
+
+export interface TitledText {
+  title: LocalizedString;
+  text: LocalizedString;
+}
+
+export interface AboutPage {
+  _id: 'aboutPage';
+  _type: 'aboutPage';
+  seo: PageSeo;
+  header: PageHeaderCopy;
+  story: { heading: LocalizedString; paragraphs: LocalizedString[] };
+  mission: TitledText;
+  vision: TitledText;
+  ceo: {
+    eyebrow: LocalizedString;
+    heading: LocalizedString;
+    story: LocalizedString;
+    quote: LocalizedString;
+    image: ImageRef;
+  };
+  values: { heading: LocalizedString; intro: LocalizedString; items: TitledText[] };
+}
+
+export interface WhatWeTradePage {
+  _id: 'whatWeTradePage';
+  _type: 'whatWeTradePage';
+  seo: PageSeo;
+  header: PageHeaderCopy;
+  ask: TitledText;
+  /** Category pages. {category} is replaced with the category name. */
+  category: {
+    eyebrow: LocalizedString;
+    examplesHeading: LocalizedString;
+    listingsHeading: LocalizedString;
+    noListings: LocalizedString;
+    viewInStock: LocalizedString;
+    seoSuffix: LocalizedString;
+  };
+}
+
+export interface StockPage {
+  _id: 'stockPage';
+  _type: 'stockPage';
+  seo: PageSeo;
+  header: PageHeaderCopy;
+  note: LocalizedString;
+  /** Listing pages. {title} and {status} are replaced. */
+  listing: {
+    seoDescription: LocalizedString;
+    sampleNote: LocalizedString;
+    specsHeading: LocalizedString;
+    descriptionHeading: LocalizedString;
+    relatedHeading: LocalizedString;
+  };
+}
+
+export interface HowWeWorkPage {
+  _id: 'howWeWorkPage';
+  _type: 'howWeWorkPage';
+  seo: PageSeo;
+  header: PageHeaderCopy;
+  faq: { heading: LocalizedString; intro: LocalizedString; items: FaqItem[] };
+}
+
+export interface VisionGroupPage {
+  _id: 'visionGroupPage';
+  _type: 'visionGroupPage';
+  seo: PageSeo;
+  header: PageHeaderCopy;
+  intro: { heading: LocalizedString; paragraphs: LocalizedString[] };
+  divisionsHeading: LocalizedString;
+}
+
+export interface ContactPage {
+  _id: 'contactPage';
+  _type: 'contactPage';
+  seo: PageSeo;
+  header: PageHeaderCopy;
+  whatsapp: TitledText;
+  detailsHeading: LocalizedString;
+  mapTitle: LocalizedString;
+  form: {
+    heading: LocalizedString;
+    intro: LocalizedString;
+    name: LocalizedString;
+    phone: LocalizedString;
+    email: LocalizedString;
+    need: LocalizedString;
+    needHint: LocalizedString;
+    category: LocalizedString;
+    categoryPlaceholder: LocalizedString;
+    categoryOther: LocalizedString;
+    message: LocalizedString;
+    required: LocalizedString;
+    optional: LocalizedString;
+    submit: LocalizedString;
+    demoMessage: LocalizedString;
+  };
+}
+
+export interface NotFoundPage {
+  _id: 'notFoundPage';
+  _type: 'notFoundPage';
+  seo: PageSeo;
+  header: PageHeaderCopy;
+  links: Link[];
 }

@@ -41,7 +41,7 @@ const items = main.map((item) => ({
                   href={item.href}
                   aria-current={item.active ? 'page' : undefined}
                   class:list={[
-                    'block rounded-md px-2.5 py-2 text-sm font-medium transition-colors hover:text-navy xl:px-3',
+                    'flex min-h-11 items-center rounded-md px-2.5 text-sm font-medium transition-colors hover:text-navy xl:px-3',
                     item.active ? 'text-navy underline decoration-orange decoration-2 underline-offset-8' : 'text-ink',
                   ]}
                 >
@@ -55,7 +55,9 @@ const items = main.map((item) => ({
 
     <LanguageSwitcher locale={locale} class="ml-auto lg:ml-2" />
 
-    <WhatsAppButton locale={locale} label={t(ui.whatsappShort, locale)} class="hidden text-sm lg:inline-flex" />
+    <div class="hidden lg:block">
+      <WhatsAppButton locale={locale} label={t(ui.whatsappShort, locale)} class="text-sm" />
+    </div>
 
     <button
       type="button"

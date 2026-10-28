@@ -4,6 +4,10 @@ export const siteSettings: SiteSettings = {
   _id: 'siteSettings',
   _type: 'siteSettings',
   companyName: 'Vision World',
+  ceo: {
+    name: 'Joseph Makina',
+    role: { en: 'CEO' },
+  },
   tagline: {
     en: 'Bridging Tanzania and Korea',
   },
@@ -21,7 +25,8 @@ export const siteSettings: SiteSettings = {
     },
     phone: '[PHONE NUMBER]',
     email: '[EMAIL ADDRESS]',
-    address: { en: '[OFFICE ADDRESS], Tanzania' },
+    address: { en: '[FLOOR AND OFFICE NUMBER], Noble Centre, Makumbusho, Dar es Salaam, Tanzania' },
+    mapQuery: 'Noble Centre, Makumbusho, Dar es Salaam, Tanzania',
     hours: { en: '[OPENING HOURS]' },
   },
   social: [],
@@ -36,4 +41,10 @@ export const siteSettings: SiteSettings = {
     },
   },
   noindex: true,
+  previewBanner: true,
+  cta: {
+    heading: { en: 'Tell us what you need' },
+    text: { en: 'Send us a message on WhatsApp or request a quote. We will get back to you with options.' },
+    quoteLink: { label: { en: 'Request a quote' }, href: 'contact' },
+  },
 };

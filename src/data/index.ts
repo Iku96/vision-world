@@ -9,6 +9,13 @@ import { categories } from './categories';
 import { listings } from './listings';
 import { divisions } from './divisions';
 import { homePage } from './pages/home';
+import { aboutPage } from './pages/about';
+import { whatWeTradePage } from './pages/whatWeTrade';
+import { stockPage } from './pages/stock';
+import { howWeWorkPage } from './pages/howWeWork';
+import { visionGroupPage } from './pages/visionGroup';
+import { contactPage } from './pages/contact';
+import { notFoundPage } from './pages/notFound';
 import type { Locale } from '../i18n/config';
 import { t } from '../i18n/utils';
 
@@ -18,11 +25,20 @@ export const getSiteSettings = () => siteSettings;
 export const getNavigation = () => navigation;
 export const getUi = () => ui;
 export const getHomePage = () => homePage;
+export const getAboutPage = () => aboutPage;
+export const getWhatWeTradePage = () => whatWeTradePage;
+export const getStockPage = () => stockPage;
+export const getHowWeWorkPage = () => howWeWorkPage;
+export const getVisionGroupPage = () => visionGroupPage;
+export const getContactPage = () => contactPage;
+export const getNotFoundPage = () => notFoundPage;
 export const getBuyerJourney = () => byOrder(buyerJourney);
 export const getCategories = () => byOrder(categories);
 export const getDivisions = () => byOrder(divisions);
 export const getListings = () => listings;
 export const getFeaturedListings = (limit = 3) => listings.filter((l) => l.featured).slice(0, limit);
+export const getListingsByCategory = (categoryId: string) => listings.filter((l) => l.category._ref === categoryId);
+export const getCategoryById = (id: string) => categories.find((c) => c._id === id);
 
 /** wa.me click-to-chat link. Falls back to the share picker while the number is a placeholder (contains X). */
 export function getWhatsappUrl(locale: Locale, message?: string): string {

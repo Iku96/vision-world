@@ -1,0 +1,32 @@
+---
+import Icon from '../Icon.astro';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { getHomePage, getUi } from '../../data';
+import { localizePath, t } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+// Hero buttons: side by side even on phones, so the hero fits one screen.
+interface Props {
+  locale: Locale;
+  class?: string;
+}
+
+const { locale, class: className } = Astro.props;
+const { secondaryCta } = getHomePage().hero;
+const ui = getUi();
+---
+
+<div class:list={['flex gap-3', className]}>
+  <WhatsAppButton
+    locale={locale}
+    shortLabel={t(ui.whatsappShort, locale)}
+    class="min-h-12 flex-1 px-4 text-base sm:flex-none sm:px-6"
+  />
+  <a
+    href={localizePath(secondaryCta.href, locale)}
+    class="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-md border-2 border-white/40 px-4 font-semibold text-white transition-colors hover:border-white hover:bg-white/10 sm:flex-none sm:px-6"
+  >
+    {t(secondaryCta.label, locale)}
+    <Icon name="arrowRight" class="size-4" />
+  </a>
+</div>

@@ -21,16 +21,16 @@ const path = stripLocale(Astro.url.pathname);
         <>
           {i > 0 && <span class="px-1 text-silver" aria-hidden="true">/</span>}
           {l === locale ? (
-            <span class="px-1.5 py-2 text-navy" aria-current="true">
+            <span class="inline-flex min-h-11 min-w-8 items-center justify-center px-1.5 text-navy" aria-current="true">
               <abbr title={meta.name} class="no-underline">{meta.label}</abbr>
             </span>
           ) : isPublished(l) ? (
-            <a href={localizePath(path, l)} hreflang={meta.htmlLang} lang={meta.htmlLang} class="px-1.5 py-2 text-globe-dark hover:underline">
+            <a href={localizePath(path, l)} hreflang={meta.htmlLang} lang={meta.htmlLang} class="inline-flex min-h-11 min-w-11 items-center justify-center px-1.5 text-globe-dark hover:underline">
               {meta.label}
             </a>
           ) : (
             <span
-              class="cursor-not-allowed px-1.5 py-2 text-slate-500"
+              class="inline-flex min-h-11 min-w-8 cursor-not-allowed items-center justify-center px-1.5 text-slate-500"
               title={`${meta.name}: ${t(ui.languageComingSoon, locale)}`}
             >
               <span aria-hidden="true">{meta.label}</span>

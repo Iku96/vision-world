@@ -558,5 +558,93 @@
     "pixabayId": 8337261,
     "user": "pen_ash",
     "pageURL": "https://pixabay.com/photos/bike-bicycle-street-urban-pavement-8337261/"
+  },
+  {
+    "file": "/src/assets/images/yard/truck-yard-2.webp",
+    "category": "yard",
+    "searchTerm": "truck yard",
+    "pixabayId": 2582041,
+    "user": "denniscastro",
+    "pageURL": "https://pixabay.com/photos/truck-crane-containers-port-2582041/"
+  },
+  {
+    "file": "/src/assets/images/yard/truck-parking-lot-3.webp",
+    "category": "yard",
+    "searchTerm": "truck parking lot",
+    "pixabayId": 67236,
+    "user": "PeterKraayvanger",
+    "pageURL": "https://pixabay.com/photos/automobile-truck-vehicle-vehicles-67236/"
+  },
+  {
+    "file": "/src/assets/images/yard/truck-depot-1.webp",
+    "category": "yard",
+    "searchTerm": "truck depot",
+    "pixabayId": 2572786,
+    "user": "StockSnap",
+    "pageURL": "https://pixabay.com/photos/container-van-truck-vehicle-export-2572786/"
+  },
+  {
+    "file": "/src/assets/images/yard/truck-depot-2.webp",
+    "category": "yard",
+    "searchTerm": "truck depot",
+    "pixabayId": 4405895,
+    "user": "marcinjozwiak",
+    "pageURL": "https://pixabay.com/photos/trucks-depot-warehouse-4405895/"
+  },
+  {
+    "file": "/src/assets/images/yard/truck-depot-3.webp",
+    "category": "yard",
+    "searchTerm": "truck depot",
+    "pixabayId": 1026496,
+    "user": "Peggy_Marco",
+    "pageURL": "https://pixabay.com/photos/warehouse-villa-rendering-1026496/"
+  },
+  {
+    "file": "/src/assets/images/yard/container-terminal-trucks-2.webp",
+    "category": "yard",
+    "searchTerm": "container terminal trucks",
+    "pixabayId": 2563947,
+    "user": "StockSnap",
+    "pageURL": "https://pixabay.com/photos/sea-ocean-blue-water-nature-2563947/"
+  },
+  {
+    "file": "/src/assets/images/vehicles/suv-car-1.webp",
+    "category": "vehicles",
+    "searchTerm": "suv car",
+    "pixabayId": 8893216,
+    "user": "lusepho",
+    "pageURL": "https://pixabay.com/photos/great-wall-motor-gwmwey-hi4-8893216/"
+  },
+  {
+    "file": "/src/assets/images/vehicles/suv-car-3.webp",
+    "category": "vehicles",
+    "searchTerm": "suv car",
+    "pixabayId": 299772,
+    "user": "AaronPictures",
+    "pageURL": "https://pixabay.com/photos/car-auto-4wd-drive-automobile-299772/"
+  },
+  {
+    "file": "/src/assets/images/vehicles/suv-side-view-1.webp",
+    "category": "vehicles",
+    "searchTerm": "suv side view",
+    "pixabayId": 2831791,
+    "user": "ArtisticOperations",
+    "pageURL": "https://pixabay.com/photos/gmc-yukon-sports-utility-vehicle-suv-2831791/"
+  },
+  {
+    "file": "/src/assets/images/vehicles/suv-side-view-2.webp",
+    "category": "vehicles",
+    "searchTerm": "suv side view",
+    "pixabayId": 2683858,
+    "user": "chapay",
+    "pageURL": "https://pixabay.com/photos/car-suv-white-background-mercedes-2683858/"
+  },
+  {
+    "file": "/src/assets/images/vehicles/4x4-vehicle-3.webp",
+    "category": "vehicles",
+    "searchTerm": "4x4 vehicle",
+    "pixabayId": 7615816,
+    "user": "jwvein",
+    "pageURL": "https://pixabay.com/photos/car-suv-mud-off-road-water-7615816/"
   }
 ]

@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Photo from '../components/Photo.astro';
+import StatusBadge from '../components/StatusBadge.astro';
+import ListingCard from '../components/ListingCard.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Icon from '../components/Icon.astro';
+import { getCategoryById, getListingsByCategory, getStockPage, getUi } from '../data';
+import { formatTZS, localizePath, t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+import type { Listing } from '../data/types';
+
+interface Props {
+  locale: Locale;
+  listing: Listing;
+}
+
+const { locale, listing } = Astro.props;
+const page = getStockPage();
+const ui = getUi();
+const title = t(listing.title, locale);
+const category = getCategoryById(listing.category._ref);
+const sold = listing.status === 'sold';
+const statusLabel = t(
+  { available: ui.statusAvailable, incoming: ui.statusIncoming, sold: ui.statusSold }[listing.status],
+  locale,
+);
+const price = listing.price.type === 'fixed' ? formatTZS(listing.price.amountTZS, locale) : t(ui.priceOnRequest, locale);
+const message = t(sold ? ui.similarMessage : ui.listingMessage, locale).replace('{title}', title);
+const [main, ...thumbs] = listing.images;
+const related = getListingsByCategory(listing.category._ref)
+  .filter((l) => l._id !== listing._id)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title={title}
+  description={t(page.listing.seoDescription, locale).replace('{title}', title).replace('{status}', statusLabel)}
+>
+  <section class="on-dark bg-navy text-white">
+    <div class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+      <Breadcrumbs
+        locale={locale}
+        items={[
+          { label: t(page.header.eyebrow, locale), href: 'stock' },
+          { label: title, href: `stock/${listing.slug.current}` },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="bg-white pb-14 lg:pb-20">
+    <div class="mx-auto grid max-w-7xl gap-8 px-4 pt-8 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:pt-12">
+      <!-- Gallery -->
+      <div class="lg:col-span-7" role="group" aria-label={t(ui.galleryLabel, locale)}>
+        {main && <Photo image={main} locale={locale} ratio="4 / 3" sizes="(min-width: 1024px) 700px, 100vw" priority class="rounded-md" />}
+        {
+          thumbs.length > 0 && (
+            <div class="mt-3 grid grid-cols-2 gap-3">
+              {thumbs.map((img) => (
+                <Photo image={img} locale={locale} ratio="4 / 3" sizes="(min-width: 1024px) 340px, 50vw" class="rounded-md" />
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Summary and actions -->
+      <div class="lg:col-span-5">
+        <StatusBadge status={listing.status} locale={locale} />
+        <h1 class="mt-4 text-3xl leading-tight font-extrabold sm:text-4xl">{title}</h1>
+        {
+          category && (
+            <a
+              href={localizePath(`what-we-trade/${category.slug.current}`, locale)}
+              class="mt-2 inline-flex min-h-11 items-center font-semibold text-globe-dark hover:underline"
+            >
+              {t(category.title, locale)}
+            </a>
+          )
+        }
+        <div class="mt-4 border-y border-silver py-4">
+          <p class="text-sm font-semibold text-slate-600">{t(ui.price, locale)}</p>
+          <p class="mt-1 font-heading text-2xl font-extrabold text-navy">{price}</p>
+        </div>
+        <div class="mt-6 flex flex-col gap-3">
+          <WhatsAppButton
+            locale={locale}
+            message={message}
+            label={t(sold ? ui.askAboutSimilar : ui.askAboutListing, locale)}
+            class="w-full px-6 text-base"
+          />
+          <a
+            href={`${localizePath('contact', locale)}${category ? `?category=${category.slug.current}` : ''}`}
+            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-navy px-6 font-semibold text-navy transition-colors hover:bg-navy hover:text-white"
+          >
+            <Icon name="quote" class="size-5" />
+            {t(ui.quoteCta, locale)}
+          </a>
+        </div>
+        <p class="mt-4 text-sm text-slate-600">{t(page.listing.sampleNote, locale)}</p>
+
+        <h2 class="mt-10 text-xl font-bold">{t(page.listing.specsHeading, locale)}</h2>
+        <table class="mt-3 w-full text-left text-sm">
+          <tbody>
+            {
+              listing.specs.map((spec) => (
+                <tr class="border-b border-mist">
+                  <th scope="row" class="w-2/5 py-3 pr-4 font-medium text-slate-600">
+                    {t(spec.label, locale)}
+                  </th>
+                  <td class="py-3 font-semibold break-words">{t(spec.value, locale)}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+
+        <h2 class="mt-10 text-xl font-bold">{t(page.listing.descriptionHeading, locale)}</h2>
+        <p class="mt-3 leading-relaxed text-slate-700">{t(listing.summary, locale)}</p>
+      </div>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section aria-labelledby="related-heading" class="bg-mist py-14 lg:py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 id="related-heading" class="text-3xl font-extrabold">
+            {t(page.listing.relatedHeading, locale)}
+          </h2>
+          <ul class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {related.map((l) => (
+              <li>
+                <ListingCard listing={l} locale={locale} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

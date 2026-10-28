@@ -1,0 +1,33 @@
+---
+import Photo from './Photo.astro';
+import { localizePath, t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+import type { Category } from '../data/types';
+
+interface Props {
+  category: Category;
+  locale: Locale;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { category, locale, headingLevel: Heading = 'h3' } = Astro.props;
+---
+
+<a
+  href={localizePath(`what-we-trade/${category.slug.current}`, locale)}
+  class="group block h-full overflow-hidden rounded-md border border-silver bg-white transition-colors hover:border-navy"
+>
+  <div class="overflow-hidden">
+    <Photo
+      image={category.image}
+      locale={locale}
+      framed={false}
+      sizes="(min-width: 1280px) 290px, (min-width: 1024px) 23vw, 50vw"
+      class="transition-transform duration-300 group-hover:scale-105"
+    />
+  </div>
+  <div class="p-3 sm:p-4">
+    <Heading class="text-base font-bold sm:text-lg">{t(category.title, locale)}</Heading>
+    <p class="mt-1 text-sm text-slate-600">{t(category.description, locale)}</p>
+  </div>
+</a>

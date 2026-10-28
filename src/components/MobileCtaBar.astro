@@ -19,9 +19,9 @@ const ui = getUi();
     <WhatsAppButton locale={locale} label={t(ui.whatsappShort, locale)} class="flex-1" />
     <a
       href={localizePath('contact', locale)}
-      class="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-md bg-navy px-4 py-2.5 font-semibold text-white transition-colors hover:bg-navy-dark"
+      class="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-md bg-navy px-3 py-2.5 font-semibold whitespace-nowrap text-white transition-colors hover:bg-navy-dark"
     >
-      <Icon name="quote" class="size-5 shrink-0" />
+      <Icon name="quote" class="hidden size-5 shrink-0 sm:block" />
       <span>{t(ui.quoteCta, locale)}</span>
     </a>
   </div>

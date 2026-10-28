@@ -1,0 +1,21 @@
+---
+import { getSiteSettings, getUi } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+// Review phase only: turn off with siteSettings.previewBanner (and drop the allowance in home/heroHeight.ts).
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { previewBanner } = getSiteSettings();
+---
+
+{
+  previewBanner && (
+    <p class="bg-ink px-4 py-1.5 text-center text-xs leading-4 font-medium text-white" role="note">
+      {t(getUi().previewBanner, locale)}
+    </p>
+  )
+}

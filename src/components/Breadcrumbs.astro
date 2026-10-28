@@ -1,0 +1,37 @@
+---
+import { getUi } from '../data';
+import { localizePath, t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+// Trail of links ending with the current page (not linked). Styled for the navy page header.
+interface Props {
+  locale: Locale;
+  /** Locale-agnostic paths. The last item is the current page. */
+  items: { label: string; href: string }[];
+}
+
+const { locale, items } = Astro.props;
+const ui = getUi();
+const trail = [{ label: t(ui.home, locale), href: '' }, ...items];
+---
+
+<nav aria-label={t(ui.breadcrumb, locale)} class="mb-4 text-sm">
+  <ol class="flex flex-wrap items-center gap-x-1 text-white/75">
+    {
+      trail.map((item, i) => (
+        <li class="flex items-center gap-x-1">
+          {i > 0 && <span aria-hidden="true">/</span>}
+          {i < trail.length - 1 ? (
+            <a href={localizePath(item.href, locale)} class="inline-flex min-h-11 items-center px-1 hover:text-white hover:underline">
+              {item.label}
+            </a>
+          ) : (
+            <span aria-current="page" class="inline-flex min-h-11 items-center px-1 text-white">
+              {item.label}
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

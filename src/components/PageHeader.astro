@@ -1,0 +1,50 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import Photo from './Photo.astro';
+import type { Locale } from '../i18n/config';
+import type { ImageRef } from '../data/types';
+
+// Navy page header with optional breadcrumbs and an optional photo on the right.
+interface Props {
+  locale: Locale;
+  eyebrow: string;
+  heading: string;
+  intro?: string;
+  breadcrumbs?: { label: string; href: string }[];
+  image?: ImageRef;
+}
+
+const { locale, eyebrow, heading, intro, breadcrumbs, image } = Astro.props;
+---
+
+<section class="on-dark bg-navy text-white">
+  <div
+    class:list={[
+      'mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16',
+      image && 'grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-14',
+    ]}
+  >
+    <div>
+      {breadcrumbs && <Breadcrumbs locale={locale} items={breadcrumbs} />}
+      <p class="flex items-center gap-2 text-sm font-semibold tracking-wider text-orange-light uppercase">
+        <span class="h-0.5 w-6 bg-orange" aria-hidden="true"></span>
+        {eyebrow}
+      </p>
+      <h1 class="mt-3 text-4xl leading-tight font-extrabold text-balance text-white sm:text-5xl">{heading}</h1>
+      {intro && <p class="mt-4 max-w-2xl text-lg leading-relaxed text-white/85">{intro}</p>}
+      <slot />
+    </div>
+    {
+      image && (
+        <Photo
+          image={image}
+          locale={locale}
+          ratio="3 / 2"
+          sizes="(min-width: 1280px) 580px, (min-width: 1024px) 45vw, 100vw"
+          priority
+          class="rounded-md"
+        />
+      )
+    }
+  </div>
+</section>

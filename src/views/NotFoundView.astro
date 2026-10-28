@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { getNotFoundPage } from '../data';
+import { localizePath, t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = getNotFoundPage();
+---
+
+<BaseLayout title={t(page.seo.title, locale)} description={t(page.seo.description, locale)}>
+  <section class="on-dark relative isolate overflow-hidden bg-navy text-white">
+    <!-- Broken route: an orange arc that stops short of its destination. -->
+    <svg
+      class="pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-60"
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
+      <path d="M120 520 C 360 120, 760 80, 900 260" fill="none" stroke="#f07a1a" stroke-width="3" stroke-dasharray="10 12"></path>
+      <circle cx="120" cy="520" r="7" fill="#f6a35c"></circle>
+      <circle cx="1080" cy="440" r="7" fill="none" stroke="#f6a35c" stroke-width="2"></circle>
+    </svg>
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <p class="text-sm font-semibold tracking-wider text-orange-light uppercase">{t(page.header.eyebrow, locale)}</p>
+      <h1 class="mt-3 max-w-2xl text-4xl leading-tight font-extrabold text-white sm:text-6xl">{t(page.header.heading, locale)}</h1>
+      <p class="mt-5 max-w-xl text-lg text-white/85">{t(page.header.intro, locale)}</p>
+      <ul class="mt-8 flex flex-wrap gap-3">
+        {
+          page.links.map((link) => (
+            <li>
+              <a
+                href={localizePath(link.href, locale)}
+                class="inline-flex min-h-11 items-center gap-2 rounded-md border-2 border-white/40 px-5 font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
+              >
+                {t(link.label, locale)}
+                <Icon name="arrowRight" class="size-4" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <WhatsAppButton locale={locale} class="mt-6 px-6" />
+    </div>
+  </section>
+</BaseLayout>

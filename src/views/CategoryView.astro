@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ListingCard from '../components/ListingCard.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Icon from '../components/Icon.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { getListingsByCategory, getUi, getWhatWeTradePage } from '../data';
+import { localizePath, t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+import type { Category } from '../data/types';
+
+interface Props {
+  locale: Locale;
+  category: Category;
+}
+
+const { locale, category } = Astro.props;
+const page = getWhatWeTradePage();
+const ui = getUi();
+const title = t(category.title, locale);
+const listings = getListingsByCategory(category._id);
+const message = t(ui.lookingForMessage, locale).replace('{item}', title);
+const slug = category.slug.current;
+---
+
+<BaseLayout
+  title={title}
+  description={`${t(category.description, locale)} ${t(page.category.seoSuffix, locale)}`}
+>
+  <PageHeader
+    locale={locale}
+    eyebrow={t(page.category.eyebrow, locale)}
+    heading={title}
+    intro={t(category.description, locale)}
+    image={category.image}
+    breadcrumbs={[
+      { label: t(page.header.eyebrow, locale), href: 'what-we-trade' },
+      { label: title, href: `what-we-trade/${slug}` },
+    ]}
+  >
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <WhatsAppButton
+        locale={locale}
+        message={message}
+        label={t(ui.askAboutCategory, locale).replace('{item}', title)}
+        class="px-6 text-base"
+      />
+      <a
+        href={`${localizePath('contact', locale)}?category=${slug}`}
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-white/40 px-6 font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
+      >
+        <Icon name="quote" class="size-5" />
+        {t(ui.quoteCta, locale)}
+      </a>
+    </div>
+  </PageHeader>
+
+  <section class="bg-white py-14 lg:py-20">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+      <div class="space-y-4 text-lg leading-relaxed text-slate-700 lg:col-span-7">
+        {category.body.map((p) => <p>{t(p, locale)}</p>)}
+      </div>
+      <div class="rounded-md bg-mist p-6 lg:col-span-5">
+        <h2 class="text-xl font-bold">{t(page.category.examplesHeading, locale)}</h2>
+        <ul class="mt-4 space-y-2">
+          {
+            category.examples.map((example) => (
+              <li class="flex gap-3">
+                <span class="mt-2.5 size-1.5 shrink-0 rounded-full bg-orange" aria-hidden="true" />
+                <span>{t(example, locale)}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="category-stock" class="bg-mist py-14 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <h2 id="category-stock" class="text-3xl font-extrabold">{t(page.category.listingsHeading, locale)}</h2>
+        <a
+          href={`${localizePath('stock', locale)}?category=${slug}`}
+          class="inline-flex min-h-11 items-center gap-1.5 font-semibold text-globe-dark hover:underline"
+        >
+          {t(page.category.viewInStock, locale)}
+          <Icon name="arrowRight" class="size-4" />
+        </a>
+      </div>
+      {
+        listings.length > 0 ? (
+          <ul class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {listings.map((listing) => (
+              <li>
+                <ListingCard listing={listing} locale={locale} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="mt-6 text-lg text-slate-700">{t(page.category.noListings, locale)}</p>
+        )
+      }
+    </div>
+  </section>
+
+  <CtaSection locale={locale} />
+</BaseLayout>

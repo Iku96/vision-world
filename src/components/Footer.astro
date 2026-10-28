@@ -37,7 +37,7 @@ const year = new Date().getFullYear();
         {
           footer.map((item) => (
             <li>
-              <a href={localizePath(item.href, locale)} class="inline-flex min-h-10 items-center text-white hover:underline">
+              <a href={localizePath(item.href, locale)} class="inline-flex min-h-11 items-center text-white hover:underline">
                 {t(item.label, locale)}
               </a>
             </li>
@@ -83,7 +83,7 @@ const year = new Date().getFullYear();
     <div>
       <h2 class="font-heading text-sm font-bold uppercase tracking-wider text-orange-light">{t(ui.footerGroup, locale)}</h2>
       <p class="mt-4 text-sm leading-relaxed text-silver">{t(ui.footerGroupText, locale)}</p>
-      <a href={localizePath('vision-group', locale)} class="mt-3 inline-flex min-h-10 items-center text-sm font-semibold text-white underline decoration-orange decoration-2 underline-offset-4">
+      <a href={localizePath('vision-group', locale)} class="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-white underline decoration-orange decoration-2 underline-offset-4">
         {t(ui.footerGroupLink, locale)}
       </a>
     </div>
