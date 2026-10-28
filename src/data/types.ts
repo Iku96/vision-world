@@ -2,6 +2,7 @@
 // data source later only changes the getters in src/data/index.ts.
 
 import type { Locale } from '../i18n/config';
+import type { IconName } from '../components/icons';
 
 /** Field-level localized string, as in Sanity's internationalized string type. */
 export type LocalizedString = { [K in Locale]?: string } & { en: string };
@@ -11,7 +12,7 @@ export interface Slug {
 }
 
 export interface ImageRef {
-  /** Path under /public or an imported asset URL. Empty means "use a placeholder". */
+  /** Photos: '/src/assets/images/...' (rendered with <Picture>). Site files like the logo: path under /public. Empty means "use a placeholder". */
   src: string;
   alt: LocalizedString;
   width?: number;
@@ -32,7 +33,7 @@ export interface SiteSettings {
   description: LocalizedString;
   logo: ImageRef;
   contact: {
-    /** International format, digits only once known, e.g. 255712345678. */
+    /** International format, e.g. +255712345678. X digits mark a placeholder. */
     whatsappNumber: string;
     whatsappMessage: LocalizedString;
     phone: string;
@@ -63,7 +64,7 @@ export interface BuyerJourneyStep {
   order: number;
   title: LocalizedString;
   description: LocalizedString;
-  icon: string;
+  icon: IconName;
 }
 
 export interface Category {
@@ -92,6 +93,43 @@ export interface Listing {
   specs: { label: LocalizedString; value: LocalizedString }[];
   images: ImageRef[];
   featured: boolean;
+}
+
+/** Heading block shared by home page sections. */
+export interface SectionCopy {
+  eyebrow: LocalizedString;
+  heading: LocalizedString;
+  intro?: LocalizedString;
+  link?: Link;
+}
+
+export interface HomePage {
+  _id: 'homePage';
+  _type: 'homePage';
+  hero: {
+    routeFrom: LocalizedString;
+    routeTo: LocalizedString;
+    heading: LocalizedString;
+    text: LocalizedString;
+    image: ImageRef;
+    secondaryCta: Link;
+  };
+  trade: SectionCopy;
+  stock: SectionCopy;
+  howWeWork: SectionCopy;
+  about: SectionCopy & {
+    text: LocalizedString;
+    quote: LocalizedString;
+    quoteName: string;
+    quoteRole: LocalizedString;
+    image: ImageRef;
+  };
+  group: SectionCopy;
+  cta: {
+    heading: LocalizedString;
+    text: LocalizedString;
+    quoteLink: Link;
+  };
 }
 
 export interface Division {

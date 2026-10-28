@@ -1,6 +1,6 @@
 [
   {
-    "file": "/images/trucks/scania-truck-1.webp",
+    "file": "/src/assets/images/trucks/scania-truck-1.webp",
     "category": "trucks",
     "searchTerm": "scania truck",
     "pixabayId": 3392100,
@@ -8,7 +8,7 @@
     "pageURL": "https://pixabay.com/photos/highway-road-trucks-vehicles-3392100/"
   },
   {
-    "file": "/images/trucks/scania-truck-2.webp",
+    "file": "/src/assets/images/trucks/scania-truck-2.webp",
     "category": "trucks",
     "searchTerm": "scania truck",
     "pixabayId": 9778955,
@@ -16,7 +16,7 @@
     "pageURL": "https://pixabay.com/photos/truck-scania-sweden-s500-vehicle-9778955/"
   },
   {
-    "file": "/images/vehicles/suv-1.webp",
+    "file": "/src/assets/images/vehicles/suv-1.webp",
     "category": "vehicles",
     "searchTerm": "suv",
     "pixabayId": 1281636,
@@ -24,7 +24,7 @@
     "pageURL": "https://pixabay.com/photos/snow-road-suv-winter-car-vehicle-1281636/"
   },
   {
-    "file": "/images/vehicles/suv-2.webp",
+    "file": "/src/assets/images/vehicles/suv-2.webp",
     "category": "vehicles",
     "searchTerm": "suv",
     "pixabayId": 1216469,
@@ -32,7 +32,7 @@
     "pageURL": "https://pixabay.com/photos/bmw-suv-auto-fog-autumn-1216469/"
   },
   {
-    "file": "/images/vehicles/suv-3.webp",
+    "file": "/src/assets/images/vehicles/suv-3.webp",
     "category": "vehicles",
     "searchTerm": "suv",
     "pixabayId": 123978,
@@ -40,7 +40,7 @@
     "pageURL": "https://pixabay.com/photos/desert-sand-rally-dunes-landscape-123978/"
   },
   {
-    "file": "/images/vehicles/used-cars-2.webp",
+    "file": "/src/assets/images/vehicles/used-cars-2.webp",
     "category": "vehicles",
     "searchTerm": "used cars",
     "pixabayId": 2138927,
@@ -48,7 +48,7 @@
     "pageURL": "https://pixabay.com/photos/car-dealer-auto-sales-automobile-2138927/"
   },
   {
-    "file": "/images/spare-parts/truck-parts-2.webp",
+    "file": "/src/assets/images/spare-parts/truck-parts-2.webp",
     "category": "spare-parts",
     "searchTerm": "truck parts",
     "pixabayId": 428519,
@@ -56,7 +56,7 @@
     "pageURL": "https://pixabay.com/photos/tire-wheel-car-rim-tires-wheels-428519/"
   },
   {
-    "file": "/images/spare-parts/truck-parts-3.webp",
+    "file": "/src/assets/images/spare-parts/truck-parts-3.webp",
     "category": "spare-parts",
     "searchTerm": "truck parts",
     "pixabayId": 4839238,
@@ -64,7 +64,7 @@
     "pageURL": "https://pixabay.com/photos/machine-vehicle-wheel-equipment-4839238/"
   },
   {
-    "file": "/images/spare-parts/auto-parts-2.webp",
+    "file": "/src/assets/images/spare-parts/auto-parts-2.webp",
     "category": "spare-parts",
     "searchTerm": "auto parts",
     "pixabayId": 406883,
@@ -72,7 +72,7 @@
     "pageURL": "https://pixabay.com/photos/car-doors-industry-automobiles-406883/"
   },
   {
-    "file": "/images/spare-parts/auto-parts-3.webp",
+    "file": "/src/assets/images/spare-parts/auto-parts-3.webp",
     "category": "spare-parts",
     "searchTerm": "auto parts",
     "pixabayId": 5985938,
@@ -80,7 +80,7 @@
     "pageURL": "https://pixabay.com/photos/starter-engine-auto-part-5985938/"
   },
   {
-    "file": "/images/electronics/refrigerator-1.webp",
+    "file": "/src/assets/images/electronics/refrigerator-1.webp",
     "category": "electronics",
     "searchTerm": "refrigerator",
     "pixabayId": 1940174,
@@ -88,7 +88,7 @@
     "pageURL": "https://pixabay.com/photos/kitchen-interior-design-room-home-1940174/"
   },
   {
-    "file": "/images/electronics/refrigerator-2.webp",
+    "file": "/src/assets/images/electronics/refrigerator-2.webp",
     "category": "electronics",
     "searchTerm": "refrigerator",
     "pixabayId": 2174593,
@@ -96,7 +96,7 @@
     "pageURL": "https://pixabay.com/photos/kitchen-counter-room-chairs-home-2174593/"
   },
   {
-    "file": "/images/electronics/refrigerator-3.webp",
+    "file": "/src/assets/images/electronics/refrigerator-3.webp",
     "category": "electronics",
     "searchTerm": "refrigerator",
     "pixabayId": 2565105,
@@ -104,7 +104,7 @@
     "pageURL": "https://pixabay.com/photos/kitchen-interior-design-indoors-2565105/"
   },
   {
-    "file": "/images/shipping/container-ship-port-1.webp",
+    "file": "/src/assets/images/shipping/container-ship-port-1.webp",
     "category": "shipping",
     "searchTerm": "container ship port",
     "pixabayId": 6631117,
@@ -112,7 +112,7 @@
     "pageURL": "https://pixabay.com/photos/container-ship-container-transport-6631117/"
   },
   {
-    "file": "/images/shipping/container-ship-port-2.webp",
+    "file": "/src/assets/images/shipping/container-ship-port-2.webp",
     "category": "shipping",
     "searchTerm": "container ship port",
     "pixabayId": 7418239,
@@ -120,7 +120,7 @@
     "pageURL": "https://pixabay.com/photos/port-container-ship-night-7418239/"
   },
   {
-    "file": "/images/shipping/container-ship-port-3.webp",
+    "file": "/src/assets/images/shipping/container-ship-port-3.webp",
     "category": "shipping",
     "searchTerm": "container ship port",
     "pixabayId": 6849995,
@@ -128,7 +128,7 @@
     "pageURL": "https://pixabay.com/photos/hamburg-port-ship-container-6849995/"
   },
   {
-    "file": "/images/shipping/shipping-containers-1.webp",
+    "file": "/src/assets/images/shipping/shipping-containers-1.webp",
     "category": "shipping",
     "searchTerm": "shipping containers",
     "pixabayId": 6794508,
@@ -136,7 +136,7 @@
     "pageURL": "https://pixabay.com/photos/ship-container-ship-tractor-6794508/"
   },
   {
-    "file": "/images/shipping/shipping-containers-2.webp",
+    "file": "/src/assets/images/shipping/shipping-containers-2.webp",
     "category": "shipping",
     "searchTerm": "shipping containers",
     "pixabayId": 8622786,
@@ -144,7 +144,7 @@
     "pageURL": "https://pixabay.com/photos/yellow-blue-container-window-color-8622786/"
   },
   {
-    "file": "/images/shipping/shipping-containers-3.webp",
+    "file": "/src/assets/images/shipping/shipping-containers-3.webp",
     "category": "shipping",
     "searchTerm": "shipping containers",
     "pixabayId": 6670684,
@@ -152,7 +152,7 @@
     "pageURL": "https://pixabay.com/photos/port-ship-water-sea-crane-freight-6670684/"
   },
   {
-    "file": "/images/general/business-handshake-1.webp",
+    "file": "/src/assets/images/general/business-handshake-1.webp",
     "category": "general",
     "searchTerm": "business handshake",
     "pixabayId": 1979261,
@@ -160,7 +160,7 @@
     "pageURL": "https://pixabay.com/photos/people-business-meeting-1979261/"
   },
   {
-    "file": "/images/general/warehouse-1.webp",
+    "file": "/src/assets/images/general/warehouse-1.webp",
     "category": "general",
     "searchTerm": "warehouse",
     "pixabayId": 5619201,
@@ -168,7 +168,7 @@
     "pageURL": "https://pixabay.com/photos/store-stacks-shelves-stock-5619201/"
   },
   {
-    "file": "/images/general/warehouse-3.webp",
+    "file": "/src/assets/images/general/warehouse-3.webp",
     "category": "general",
     "searchTerm": "warehouse",
     "pixabayId": 1850170,
@@ -176,7 +176,7 @@
     "pageURL": "https://pixabay.com/photos/archive-boxes-shelf-folders-1850170/"
   },
   {
-    "file": "/images/trucks/semi-truck-1.webp",
+    "file": "/src/assets/images/trucks/semi-truck-1.webp",
     "category": "trucks",
     "searchTerm": "semi truck",
     "pixabayId": 1867268,
@@ -184,7 +184,7 @@
     "pageURL": "https://pixabay.com/photos/digger-excavator-engine-heavy-1867268/"
   },
   {
-    "file": "/images/trucks/semi-truck-2.webp",
+    "file": "/src/assets/images/trucks/semi-truck-2.webp",
     "category": "trucks",
     "searchTerm": "semi truck",
     "pixabayId": 4783290,
@@ -192,7 +192,7 @@
     "pageURL": "https://pixabay.com/photos/cargo-transportation-truck-4783290/"
   },
   {
-    "file": "/images/trucks/semi-truck-3.webp",
+    "file": "/src/assets/images/trucks/semi-truck-3.webp",
     "category": "trucks",
     "searchTerm": "semi truck",
     "pixabayId": 4349523,
@@ -200,7 +200,7 @@
     "pageURL": "https://pixabay.com/photos/truck-american-show-traffic-4349523/"
   },
   {
-    "file": "/images/trucks/dump-truck-1.webp",
+    "file": "/src/assets/images/trucks/dump-truck-1.webp",
     "category": "trucks",
     "searchTerm": "dump truck",
     "pixabayId": 1846346,
@@ -208,7 +208,7 @@
     "pageURL": "https://pixabay.com/photos/loader-gravel-digger-excavator-1846346/"
   },
   {
-    "file": "/images/trucks/dump-truck-2.webp",
+    "file": "/src/assets/images/trucks/dump-truck-2.webp",
     "category": "trucks",
     "searchTerm": "dump truck",
     "pixabayId": 4711976,
@@ -216,7 +216,7 @@
     "pageURL": "https://pixabay.com/photos/truck-dump-mining-coal-blue-truck-4711976/"
   },
   {
-    "file": "/images/trucks/dump-truck-3.webp",
+    "file": "/src/assets/images/trucks/dump-truck-3.webp",
     "category": "trucks",
     "searchTerm": "dump truck",
     "pixabayId": 6602140,
@@ -224,7 +224,7 @@
     "pageURL": "https://pixabay.com/photos/dump-truck-kaelble-k33-truck-6602140/"
   },
   {
-    "file": "/images/trucks/truck-fleet-2.webp",
+    "file": "/src/assets/images/trucks/truck-fleet-2.webp",
     "category": "trucks",
     "searchTerm": "truck fleet",
     "pixabayId": 3401529,
@@ -232,7 +232,7 @@
     "pageURL": "https://pixabay.com/photos/truck-semi-transportation-3401529/"
   },
   {
-    "file": "/images/trucks/truck-fleet-3.webp",
+    "file": "/src/assets/images/trucks/truck-fleet-3.webp",
     "category": "trucks",
     "searchTerm": "truck fleet",
     "pixabayId": 602567,
@@ -240,7 +240,7 @@
     "pageURL": "https://pixabay.com/photos/truck-semi-trailer-usa-602567/"
   },
   {
-    "file": "/images/vehicles/car-dealership-3.webp",
+    "file": "/src/assets/images/vehicles/car-dealership-3.webp",
     "category": "vehicles",
     "searchTerm": "car dealership",
     "pixabayId": 718781,
@@ -248,7 +248,7 @@
     "pageURL": "https://pixabay.com/photos/car-automobile-wagon-cars-trade-718781/"
   },
   {
-    "file": "/images/vehicles/used-car-lot-2.webp",
+    "file": "/src/assets/images/vehicles/used-car-lot-2.webp",
     "category": "vehicles",
     "searchTerm": "used car lot",
     "pixabayId": 4322521,
@@ -256,7 +256,7 @@
     "pageURL": "https://pixabay.com/photos/fiat-500-automobile-trees-4322521/"
   },
   {
-    "file": "/images/spare-parts/car-engine-parts-1.webp",
+    "file": "/src/assets/images/spare-parts/car-engine-parts-1.webp",
     "category": "spare-parts",
     "searchTerm": "car engine parts",
     "pixabayId": 2337802,
@@ -264,7 +264,7 @@
     "pageURL": "https://pixabay.com/photos/filter-engine-oil-filter-car-tool-2337802/"
   },
   {
-    "file": "/images/spare-parts/car-engine-parts-2.webp",
+    "file": "/src/assets/images/spare-parts/car-engine-parts-2.webp",
     "category": "spare-parts",
     "searchTerm": "car engine parts",
     "pixabayId": 3652852,
@@ -272,7 +272,7 @@
     "pageURL": "https://pixabay.com/photos/transmission-car-part-auto-body-3652852/"
   },
   {
-    "file": "/images/spare-parts/brake-disc-1.webp",
+    "file": "/src/assets/images/spare-parts/brake-disc-1.webp",
     "category": "spare-parts",
     "searchTerm": "brake disc",
     "pixabayId": 1954643,
@@ -280,7 +280,7 @@
     "pageURL": "https://pixabay.com/photos/auto-repair-shop-workshop-brake-disc-1954643/"
   },
   {
-    "file": "/images/spare-parts/brake-disc-2.webp",
+    "file": "/src/assets/images/spare-parts/brake-disc-2.webp",
     "category": "spare-parts",
     "searchTerm": "brake disc",
     "pixabayId": 2417026,
@@ -288,7 +288,7 @@
     "pageURL": "https://pixabay.com/photos/alloy-wheel-car-alloy-wheel-auto-2417026/"
   },
   {
-    "file": "/images/spare-parts/brake-disc-3.webp",
+    "file": "/src/assets/images/spare-parts/brake-disc-3.webp",
     "category": "spare-parts",
     "searchTerm": "brake disc",
     "pixabayId": 1954636,
@@ -296,7 +296,7 @@
     "pageURL": "https://pixabay.com/photos/auto-repair-shop-workshop-brake-disc-1954636/"
   },
   {
-    "file": "/images/spare-parts/truck-engine-2.webp",
+    "file": "/src/assets/images/spare-parts/truck-engine-2.webp",
     "category": "spare-parts",
     "searchTerm": "truck engine",
     "pixabayId": 6846464,
@@ -304,7 +304,7 @@
     "pageURL": "https://pixabay.com/photos/truck-transport-engine-rural-6846464/"
   },
   {
-    "file": "/images/spare-parts/truck-engine-3.webp",
+    "file": "/src/assets/images/spare-parts/truck-engine-3.webp",
     "category": "spare-parts",
     "searchTerm": "truck engine",
     "pixabayId": 6761518,
@@ -312,7 +312,7 @@
     "pageURL": "https://pixabay.com/photos/truck-unimog-vehicle-automobile-6761518/"
   },
   {
-    "file": "/images/electronics/fridge-appliance-1.webp",
+    "file": "/src/assets/images/electronics/fridge-appliance-1.webp",
     "category": "electronics",
     "searchTerm": "fridge appliance",
     "pixabayId": 3136855,
@@ -320,7 +320,7 @@
     "pageURL": "https://pixabay.com/photos/refrigerator-pink-powerful-can-3136855/"
   },
   {
-    "file": "/images/electronics/fridge-appliance-2.webp",
+    "file": "/src/assets/images/electronics/fridge-appliance-2.webp",
     "category": "electronics",
     "searchTerm": "fridge appliance",
     "pixabayId": 1728501,
@@ -328,7 +328,7 @@
     "pageURL": "https://pixabay.com/photos/refrigerator-can-cookie-jar-blue-1728501/"
   },
   {
-    "file": "/images/electronics/fridge-appliance-3.webp",
+    "file": "/src/assets/images/electronics/fridge-appliance-3.webp",
     "category": "electronics",
     "searchTerm": "fridge appliance",
     "pixabayId": 3136856,
@@ -336,7 +336,7 @@
     "pageURL": "https://pixabay.com/photos/refrigerator-pink-powerful-can-3136856/"
   },
   {
-    "file": "/images/electronics/home-appliances-2.webp",
+    "file": "/src/assets/images/electronics/home-appliances-2.webp",
     "category": "electronics",
     "searchTerm": "home appliances",
     "pixabayId": 1171462,
@@ -344,7 +344,7 @@
     "pageURL": "https://pixabay.com/photos/architecture-interior-furniture-1171462/"
   },
   {
-    "file": "/images/electronics/home-appliances-3.webp",
+    "file": "/src/assets/images/electronics/home-appliances-3.webp",
     "category": "electronics",
     "searchTerm": "home appliances",
     "pixabayId": 1336160,
@@ -352,7 +352,7 @@
     "pageURL": "https://pixabay.com/photos/kitchen-dining-room-dining-table-1336160/"
   },
   {
-    "file": "/images/electronics/radio-1.webp",
+    "file": "/src/assets/images/electronics/radio-1.webp",
     "category": "electronics",
     "searchTerm": "radio",
     "pixabayId": 4333412,
@@ -360,7 +360,7 @@
     "pageURL": "https://pixabay.com/photos/radio-portable-radio-4333412/"
   },
   {
-    "file": "/images/electronics/radio-2.webp",
+    "file": "/src/assets/images/electronics/radio-2.webp",
     "category": "electronics",
     "searchTerm": "radio",
     "pixabayId": 1954856,
@@ -368,7 +368,7 @@
     "pageURL": "https://pixabay.com/photos/radio-tube-radio-radio-device-1954856/"
   },
   {
-    "file": "/images/general/warehouse-shelves-1.webp",
+    "file": "/src/assets/images/general/warehouse-shelves-1.webp",
     "category": "general",
     "searchTerm": "warehouse shelves",
     "pixabayId": 4074061,
@@ -376,7 +376,7 @@
     "pageURL": "https://pixabay.com/photos/steel-shelf-industrial-hall-4074061/"
   },
   {
-    "file": "/images/general/warehouse-shelves-2.webp",
+    "file": "/src/assets/images/general/warehouse-shelves-2.webp",
     "category": "general",
     "searchTerm": "warehouse shelves",
     "pixabayId": 3129730,
@@ -384,7 +384,7 @@
     "pageURL": "https://pixabay.com/photos/industry-shelf-stole-warehouse-3129730/"
   },
   {
-    "file": "/images/general/logistics-warehouse-1.webp",
+    "file": "/src/assets/images/general/logistics-warehouse-1.webp",
     "category": "general",
     "searchTerm": "logistics warehouse",
     "pixabayId": 1845350,
@@ -392,7 +392,7 @@
     "pageURL": "https://pixabay.com/photos/port-pier-cargo-containers-crate-1845350/"
   },
   {
-    "file": "/images/general/logistics-warehouse-2.webp",
+    "file": "/src/assets/images/general/logistics-warehouse-2.webp",
     "category": "general",
     "searchTerm": "logistics warehouse",
     "pixabayId": 7921948,
@@ -400,7 +400,7 @@
     "pageURL": "https://pixabay.com/photos/cranes-industry-crane-system-port-7921948/"
   },
   {
-    "file": "/images/general/logistics-warehouse-3.webp",
+    "file": "/src/assets/images/general/logistics-warehouse-3.webp",
     "category": "general",
     "searchTerm": "logistics warehouse",
     "pixabayId": 4408573,
@@ -408,7 +408,7 @@
     "pageURL": "https://pixabay.com/photos/production-facility-logistic-4408573/"
   },
   {
-    "file": "/images/general/cargo-loading-2.webp",
+    "file": "/src/assets/images/general/cargo-loading-2.webp",
     "category": "general",
     "searchTerm": "cargo loading",
     "pixabayId": 6576842,
@@ -416,7 +416,7 @@
     "pageURL": "https://pixabay.com/photos/ship-port-cranes-water-sea-6576842/"
   },
   {
-    "file": "/images/general/cargo-loading-3.webp",
+    "file": "/src/assets/images/general/cargo-loading-3.webp",
     "category": "general",
     "searchTerm": "cargo loading",
     "pixabayId": 4815503,
@@ -424,7 +424,7 @@
     "pageURL": "https://pixabay.com/photos/shipping-container-crane-cargo-4815503/"
   },
   {
-    "file": "/images/kitchenware/cooking-pots-3.webp",
+    "file": "/src/assets/images/kitchenware/cooking-pots-3.webp",
     "category": "kitchenware",
     "searchTerm": "cooking pots",
     "pixabayId": 1006694,
@@ -432,7 +432,7 @@
     "pageURL": "https://pixabay.com/photos/vegetables-pot-cooking-ingredients-1006694/"
   },
   {
-    "file": "/images/kitchenware/kitchen-utensils-2.webp",
+    "file": "/src/assets/images/kitchenware/kitchen-utensils-2.webp",
     "category": "kitchenware",
     "searchTerm": "kitchen utensils",
     "pixabayId": 1839061,
@@ -440,7 +440,7 @@
     "pageURL": "https://pixabay.com/photos/knives-set-chopping-board-slice-1839061/"
   },
   {
-    "file": "/images/clothing/clothes-rack-1.webp",
+    "file": "/src/assets/images/clothing/clothes-rack-1.webp",
     "category": "clothing",
     "searchTerm": "clothes rack",
     "pixabayId": 1850082,
@@ -448,7 +448,7 @@
     "pageURL": "https://pixabay.com/photos/hangers-clothing-shopping-market-1850082/"
   },
   {
-    "file": "/images/clothing/clothes-rack-2.webp",
+    "file": "/src/assets/images/clothing/clothes-rack-2.webp",
     "category": "clothing",
     "searchTerm": "clothes rack",
     "pixabayId": 5961193,
@@ -456,7 +456,7 @@
     "pageURL": "https://pixabay.com/photos/wardrobe-coat-hanger-dressing-room-5961193/"
   },
   {
-    "file": "/images/clothing/clothes-rack-3.webp",
+    "file": "/src/assets/images/clothing/clothes-rack-3.webp",
     "category": "clothing",
     "searchTerm": "clothes rack",
     "pixabayId": 1839935,
@@ -464,7 +464,7 @@
     "pageURL": "https://pixabay.com/photos/clothes-clothing-fashion-store-1839935/"
   },
   {
-    "file": "/images/clothing/second-hand-clothes-1.webp",
+    "file": "/src/assets/images/clothing/second-hand-clothes-1.webp",
     "category": "clothing",
     "searchTerm": "second hand clothes",
     "pixabayId": 2100208,
@@ -472,7 +472,7 @@
     "pageURL": "https://pixabay.com/photos/clothing-vintage-clothes-retro-2100208/"
   },
   {
-    "file": "/images/clothing/second-hand-clothes-2.webp",
+    "file": "/src/assets/images/clothing/second-hand-clothes-2.webp",
     "category": "clothing",
     "searchTerm": "second hand clothes",
     "pixabayId": 5371410,
@@ -480,7 +480,7 @@
     "pageURL": "https://pixabay.com/photos/clothes-old-on-hangers-rack-5371410/"
   },
   {
-    "file": "/images/clothing/second-hand-clothes-3.webp",
+    "file": "/src/assets/images/clothing/second-hand-clothes-3.webp",
     "category": "clothing",
     "searchTerm": "second hand clothes",
     "pixabayId": 3779497,
@@ -488,7 +488,7 @@
     "pageURL": "https://pixabay.com/photos/used-clothing-second-hand-2nd-hand-3779497/"
   },
   {
-    "file": "/images/bags/travel-bag-1.webp",
+    "file": "/src/assets/images/bags/travel-bag-1.webp",
     "category": "bags",
     "searchTerm": "travel bag",
     "pixabayId": 1854148,
@@ -496,7 +496,7 @@
     "pageURL": "https://pixabay.com/photos/bag-leather-messenger-bag-classic-1854148/"
   },
   {
-    "file": "/images/bags/travel-bag-2.webp",
+    "file": "/src/assets/images/bags/travel-bag-2.webp",
     "category": "bags",
     "searchTerm": "travel bag",
     "pixabayId": 5219496,
@@ -504,7 +504,7 @@
     "pageURL": "https://pixabay.com/photos/merry-christmas-boarding-pass-travel-5219496/"
   },
   {
-    "file": "/images/bags/travel-bag-3.webp",
+    "file": "/src/assets/images/bags/travel-bag-3.webp",
     "category": "bags",
     "searchTerm": "travel bag",
     "pixabayId": 407198,
@@ -512,7 +512,7 @@
     "pageURL": "https://pixabay.com/photos/handbag-purse-bag-country-lane-407198/"
   },
   {
-    "file": "/images/bags/leather-duffel-bag-1.webp",
+    "file": "/src/assets/images/bags/leather-duffel-bag-1.webp",
     "category": "bags",
     "searchTerm": "leather duffel bag",
     "pixabayId": 2599086,
@@ -520,7 +520,7 @@
     "pageURL": "https://pixabay.com/photos/handbag-leather-brown-blur-tree-2599086/"
   },
   {
-    "file": "/images/bags/leather-duffel-bag-2.webp",
+    "file": "/src/assets/images/bags/leather-duffel-bag-2.webp",
     "category": "bags",
     "searchTerm": "leather duffel bag",
     "pixabayId": 1565402,
@@ -528,7 +528,7 @@
     "pageURL": "https://pixabay.com/photos/pocket-leather-goods-purse-notebook-1565402/"
   },
   {
-    "file": "/images/bags/leather-duffel-bag-3.webp",
+    "file": "/src/assets/images/bags/leather-duffel-bag-3.webp",
     "category": "bags",
     "searchTerm": "leather duffel bag",
     "pixabayId": 1149289,
@@ -536,7 +536,7 @@
     "pageURL": "https://pixabay.com/photos/luggage-travel-sunlight-vacations-1149289/"
   },
   {
-    "file": "/images/bicycles/vintage-bicycle-1.webp",
+    "file": "/src/assets/images/bicycles/vintage-bicycle-1.webp",
     "category": "bicycles",
     "searchTerm": "vintage bicycle",
     "pixabayId": 3045580,
@@ -544,7 +544,7 @@
     "pageURL": "https://pixabay.com/photos/bicycle-children-graffiti-art-3045580/"
   },
   {
-    "file": "/images/bicycles/vintage-bicycle-2.webp",
+    "file": "/src/assets/images/bicycles/vintage-bicycle-2.webp",
     "category": "bicycles",
     "searchTerm": "vintage bicycle",
     "pixabayId": 1872682,
@@ -552,7 +552,7 @@
     "pageURL": "https://pixabay.com/photos/bicycle-vintage-street-shop-retro-1872682/"
   },
   {
-    "file": "/images/bicycles/vintage-bicycle-3.webp",
+    "file": "/src/assets/images/bicycles/vintage-bicycle-3.webp",
     "category": "bicycles",
     "searchTerm": "vintage bicycle",
     "pixabayId": 8337261,

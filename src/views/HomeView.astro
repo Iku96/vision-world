@@ -1,9 +1,13 @@
 ---
-// Temporary: shell only, so the shared layout can be reviewed.
-// Home page sections are built after layout approval.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OrganizationJsonLd from '../components/OrganizationJsonLd.astro';
-import PlaceholderImage from '../components/PlaceholderImage.astro';
+import Hero from '../components/home/Hero.astro';
+import TradeSection from '../components/home/TradeSection.astro';
+import StockSection from '../components/home/StockSection.astro';
+import HowWeWorkSection from '../components/home/HowWeWorkSection.astro';
+import AboutSection from '../components/home/AboutSection.astro';
+import GroupSection from '../components/home/GroupSection.astro';
+import CtaSection from '../components/home/CtaSection.astro';
 import type { Locale } from '../i18n/config';
 
 interface Props {
@@ -15,7 +19,11 @@ const { locale } = Astro.props;
 
 <BaseLayout>
   <OrganizationJsonLd slot="head" locale={locale} />
-  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
-    <PlaceholderImage locale={locale} description="Home page sections go here after layout review" ratio="16 / 9" />
-  </div>
+  <Hero locale={locale} />
+  <TradeSection locale={locale} />
+  <StockSection locale={locale} />
+  <HowWeWorkSection locale={locale} />
+  <AboutSection locale={locale} />
+  <GroupSection locale={locale} />
+  <CtaSection locale={locale} />
 </BaseLayout>

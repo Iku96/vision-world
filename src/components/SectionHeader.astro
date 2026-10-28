@@ -1,0 +1,37 @@
+---
+import Icon from './Icon.astro';
+import { localizePath, t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+import type { SectionCopy } from '../data/types';
+
+interface Props {
+  copy: SectionCopy;
+  locale: Locale;
+  /** id for the h2, so the section can use aria-labelledby. */
+  id: string;
+}
+
+const { copy, locale, id } = Astro.props;
+---
+
+<div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-8">
+  <div class="max-w-2xl">
+    <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-globe-dark">
+      <span class="h-0.5 w-6 bg-orange" aria-hidden="true"></span>
+      {t(copy.eyebrow, locale)}
+    </p>
+    <h2 id={id} class="mt-3 text-3xl font-extrabold sm:text-4xl">{t(copy.heading, locale)}</h2>
+    {copy.intro && <p class="mt-3 text-lg text-slate-700">{t(copy.intro, locale)}</p>}
+  </div>
+  {
+    copy.link && (
+      <a
+        href={localizePath(copy.link.href, locale)}
+        class="inline-flex min-h-11 shrink-0 items-center gap-1.5 font-semibold text-globe-dark hover:underline"
+      >
+        {t(copy.link.label, locale)}
+        <Icon name="arrowRight" class="size-4" />
+      </a>
+    )
+  }
+</div>

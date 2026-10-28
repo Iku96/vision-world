@@ -24,7 +24,7 @@ Shipping and clearing are **future divisions**, not confirmed current services. 
 
 - Describe the **buyer journey we support**: Sourcing in Korea > Import > Inspection > Handover.
 - Never claim Vision World runs shipping or customs clearing itself.
-- The steps live in a data file (`src/data/buyerJourney.ts`) so wording can change without touching components. The service strip and How We Work page both read from it.
+- The steps live in a data file (`src/data/buyerJourney.ts`) so wording can change without touching components. The How We Work section (home page) and page read from it. There is no separate service strip under the hero.
 
 Korea is the main source, not the only one. Say "from Korea and beyond", never "only from Korea".
 
@@ -81,9 +81,11 @@ Components never hardcode copy. All text, links, phone numbers and listings come
 
 ### Images
 
-- Real Vision World photos replace placeholders before launch.
-- Until then, use the `PlaceholderImage` component: a clearly labelled box ("Placeholder: [description]"), not a stock photo pretending to be real stock.
-- `scripts/fetch-images.mjs` (`npm run fetch-images`) pulls Pixabay photos into `public/images/` with credits in `public/images/credits.json`. The client runs it separately; don't depend on those files existing.
+- Photos live in `src/assets/images/{category}/` and are rendered with the `Photo` component, which uses Astro's `<Picture>` to output responsive AVIF with a WebP fallback. Always pass a `sizes` hint matching the layout; pass `priority` only for the above-the-fold hero.
+- In data files, photo `src` is the full asset path, e.g. `/src/assets/images/trucks/truck-fleet-2.webp`. If the file is missing, `Photo` renders a labelled placeholder instead.
+- `public/` holds only site files that must keep fixed URLs: `logo.png`, `og-default.png`, favicons. Original logo sources live in `brand/` (not deployed).
+- Real Vision World photos replace placeholders before launch. Stock listings use the `PlaceholderImage` (empty `src`), never a stock photo pretending to be real stock.
+- `scripts/fetch-images.mjs` (`npm run fetch-images`) pulls Pixabay photos into `src/assets/images/` with credits in `src/assets/images/credits.json`. It only adds: never overwrites files, and skips IDs in `scripts/pixabay-exclude.json`. The client runs it separately; don't depend on specific files existing.
 
 ### Logo
 
@@ -132,12 +134,25 @@ Define in `src/styles/global.css` using Tailwind v4 `@theme` (there is no `tailw
 - **Demo phase:** `<meta name="robots" content="noindex">` on every page until launch. Controlled by `siteSettings.noindex`, output once in the `SEO` component.
 - **Accessibility:** semantic HTML, one `h1` per page, visible focus states, alt text on all images, form labels.
 
+## To confirm with client
+
+Do not present these as fact on the site until confirmed. Keep the current wording or placeholders until then.
+
+- **Shipping:** whether Vision World arranges shipping itself or through partners (currently a future division; copy avoids claiming it).
+- **Clearing:** same as shipping (Vision Clearing & Forwarding is a future division).
+- **Inspection:** whether buyers can inspect goods in Tanzania before handover, as the current How We Work copy implies.
+- **Handover:** how and where delivery or collection happens in Tanzania.
+- **CEO details:** name, story, quote, portrait photo.
+- **Contact details:** WhatsApp number (currently `+255XXXXXXXXX`), phone, email, office address, opening hours.
+- **Official company name:** legal or registered name for the footer and Organization JSON-LD.
+- **Price display preference:** whether to show TZS prices on listings or always "Price on request".
+
 ## Writing style
 
 - Clear, confident, plain English.
 - **No em dashes.** Use commas, full stops, or colons.
 - **No fake testimonials. No invented numbers** (years in business, units sold, clients served, etc.).
-- Where information is missing, use obvious placeholders in square brackets: `[CEO NAME]`, `[WHATSAPP NUMBER]`, `[OFFICE ADDRESS]`, `[YEAR FOUNDED]`. Never fill gaps with plausible-sounding made-up facts.
+- Where information is missing, use obvious placeholders in square brackets: `[CEO NAME]`, `[OFFICE ADDRESS]`, `[YEAR FOUNDED]`. Never fill gaps with plausible-sounding made-up facts.
 
 ## Commands
 

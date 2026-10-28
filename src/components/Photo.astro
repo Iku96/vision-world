@@ -1,0 +1,62 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import PlaceholderImage from './PlaceholderImage.astro';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+import type { ImageRef } from '../data/types';
+
+// Responsive AVIF/WebP photo from src/assets/images, or a labelled placeholder if the file is missing.
+interface Props {
+  image: ImageRef;
+  locale: Locale;
+  /** CSS aspect-ratio; the image is cropped to fit. */
+  ratio?: string;
+  /** Rendered width hint for the browser, e.g. "(min-width: 1024px) 50vw, 100vw". */
+  sizes?: string;
+  /** Above-the-fold image: load eagerly with high priority. */
+  priority?: boolean;
+  framed?: boolean;
+  class?: string;
+}
+
+const {
+  image,
+  locale,
+  ratio = '4 / 3',
+  sizes = '100vw',
+  priority = false,
+  framed = true,
+  class: className,
+} = Astro.props;
+
+// Lazy glob: only the images actually used are loaded and processed.
+const assets = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{webp,jpg,jpeg,png,avif}');
+const loader = assets[image.src];
+const meta = loader ? (await loader()).default : undefined;
+
+// Never upscale: keep candidate widths below the original, plus the original itself.
+const CANDIDATE_WIDTHS = [320, 480, 640, 800, 960, 1280, 1600];
+const widths = meta ? [...CANDIDATE_WIDTHS.filter((w) => w < meta.width), meta.width] : [];
+const alt = t(image.alt, locale);
+---
+
+{
+  meta ? (
+    <Picture
+      src={meta}
+      alt={alt}
+      widths={widths}
+      sizes={sizes}
+      formats={['avif']}
+      fallbackFormat="webp"
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : undefined}
+      decoding="async"
+      style={{ aspectRatio: ratio }}
+      class:list={['w-full object-cover', className]}
+    />
+  ) : (
+    <PlaceholderImage locale={locale} description={alt} ratio={ratio} framed={framed} class={className} />
+  )
+}

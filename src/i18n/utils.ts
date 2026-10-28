@@ -1,5 +1,5 @@
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { defaultLocale, locales, publishedLocales, type Locale } from './config';
+import { defaultLocale, localeMeta, locales, publishedLocales, type Locale } from './config';
 import type { LocalizedString } from '../data/types';
 
 export function isLocale(value: string | undefined): value is Locale {
@@ -18,6 +18,15 @@ export function isPublished(locale: Locale): boolean {
 /** Read a localized field, falling back to the default locale. */
 export function t(value: LocalizedString, locale: Locale): string {
   return value[locale] ?? value.en;
+}
+
+/** Format a TZS amount, e.g. "TSh 45,000,000". */
+export function formatTZS(amount: number, locale: Locale): string {
+  return new Intl.NumberFormat(`${localeMeta[locale].htmlLang}-TZ`, {
+    style: 'currency',
+    currency: 'TZS',
+    maximumFractionDigits: 0,
+  }).format(amount);
 }
 
 /** Turn a locale-agnostic path ('', 'about', 'stock#incoming') into a URL for the given locale. */

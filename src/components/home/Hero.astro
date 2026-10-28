@@ -1,0 +1,51 @@
+---
+import Icon from '../Icon.astro';
+import Photo from '../Photo.astro';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { getHomePage } from '../../data';
+import { localizePath, t } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { hero } = getHomePage();
+---
+
+<section class="on-dark bg-navy text-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 pt-10 pb-12 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-14 lg:px-8 lg:py-20">
+    <div>
+      <p class="flex items-center gap-3 text-sm font-semibold uppercase tracking-wider text-orange-light">
+        <span>{t(hero.routeFrom, locale)}</span>
+        <span class="relative h-0.5 w-12 bg-orange" aria-hidden="true">
+          <span class="absolute -top-[3px] -right-1 size-2 rounded-full bg-orange"></span>
+        </span>
+        <span>{t(hero.routeTo, locale)}</span>
+      </p>
+      <h1 class="mt-5 text-4xl leading-[1.05] font-extrabold text-balance text-white sm:text-5xl lg:text-6xl">
+        {t(hero.heading, locale)}
+      </h1>
+      <p class="mt-5 max-w-xl text-lg leading-relaxed text-white/85">{t(hero.text, locale)}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <WhatsAppButton locale={locale} class="px-6 py-3 text-base" />
+        <a
+          href={localizePath(hero.secondaryCta.href, locale)}
+          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-white/40 px-6 py-3 font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
+        >
+          {t(hero.secondaryCta.label, locale)}
+          <Icon name="arrowRight" class="size-4" />
+        </a>
+      </div>
+    </div>
+    <Photo
+      image={hero.image}
+      locale={locale}
+      ratio="3 / 2"
+      sizes="(min-width: 1280px) 580px, (min-width: 1024px) 45vw, 100vw"
+      priority
+      class="rounded-md"
+    />
+  </div>
+</section>

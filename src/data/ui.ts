@@ -20,4 +20,15 @@ export const ui = {
   footerGroupLink: { en: 'See what is coming' },
   rights: { en: 'All rights reserved.' },
   placeholder: { en: 'Placeholder' },
+  statusAvailable: { en: 'Available' },
+  statusIncoming: { en: 'Incoming' },
+  statusSold: { en: 'Sold' },
+  priceOnRequest: { en: 'Price on request' },
+  askAboutListing: { en: 'Ask on WhatsApp' },
+  askAboutSimilar: { en: 'Ask about similar' },
+  /** {title} is replaced with the listing title. */
+  listingMessage: { en: 'Hello Vision World, I am interested in: {title}' },
+  similarMessage: { en: 'Hello Vision World, I am looking for something similar to: {title}' },
+  comingSoon: { en: 'Coming soon' },
+  step: { en: 'Step' },
 } satisfies Record<string, LocalizedString>;

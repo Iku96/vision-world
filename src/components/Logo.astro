@@ -1,8 +1,6 @@
 ---
-import { existsSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import sharp from 'sharp';
 import { getSiteSettings } from '../data';
+import { getPublicImageSize } from '../lib/images';
 import { t } from '../i18n/utils';
 import type { Locale } from '../i18n/config';
 
@@ -18,9 +16,8 @@ interface Props {
 const { locale, tone = 'light', size = 'h-12', class: className } = Astro.props;
 const { logo, companyName } = getSiteSettings();
 
-// Read the logo's real size at build time to avoid layout shift; fall back to a wordmark if missing.
-const file = fileURLToPath(new URL(`../../public${logo.src}`, import.meta.url));
-const meta = logo.src && existsSync(file) ? await sharp(file).metadata() : undefined;
+// Real size avoids layout shift; fall back to a wordmark if the file is missing.
+const meta = await getPublicImageSize(logo.src);
 ---
 
 {

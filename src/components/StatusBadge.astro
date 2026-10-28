@@ -1,0 +1,26 @@
+---
+import { getUi } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+import type { ListingStatus } from '../data/types';
+
+interface Props {
+  status: ListingStatus;
+  locale: Locale;
+  class?: string;
+}
+
+const { status, locale, class: className } = Astro.props;
+const ui = getUi();
+
+const styles: Record<ListingStatus, { label: keyof typeof ui; classes: string }> = {
+  available: { label: 'statusAvailable', classes: 'bg-navy text-white' },
+  incoming: { label: 'statusIncoming', classes: 'bg-orange-light text-ink' },
+  sold: { label: 'statusSold', classes: 'bg-silver text-ink' },
+};
+const style = styles[status];
+---
+
+<span class:list={['inline-block rounded px-2.5 py-1 text-xs font-bold uppercase tracking-wider', style.classes, className]}>
+  {t(ui[style.label], locale)}
+</span>

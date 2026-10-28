@@ -11,10 +11,12 @@ interface Props {
   description: string;
   /** CSS aspect-ratio, e.g. "16 / 9". */
   ratio?: string;
+  /** Dashed border and rounded corners. Turn off inside cards. */
+  framed?: boolean;
   class?: string;
 }
 
-const { locale, description, ratio = '4 / 3', class: className } = Astro.props;
+const { locale, description, ratio = '4 / 3', framed = true, class: className } = Astro.props;
 const ui = getUi();
 ---
 
@@ -23,7 +25,8 @@ const ui = getUi();
   aria-label={`${t(ui.placeholder, locale)}: ${description}`}
   style={{ aspectRatio: ratio }}
   class:list={[
-    'flex flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed border-silver bg-mist p-4 text-center text-slate-600',
+    'flex flex-col items-center justify-center gap-2 bg-mist p-4 text-center text-slate-600',
+    framed && 'rounded-md border-2 border-dashed border-silver',
     className,
   ]}
 >

@@ -15,7 +15,7 @@ export const siteSettings: SiteSettings = {
     alt: { en: 'Vision World' },
   },
   contact: {
-    whatsappNumber: '[WHATSAPP NUMBER]',
+    whatsappNumber: '+255XXXXXXXXX',
     whatsappMessage: {
       en: 'Hello Vision World, I would like a quote.',
     },

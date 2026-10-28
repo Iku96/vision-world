@@ -1,0 +1,47 @@
+---
+import Photo from '../Photo.astro';
+import SectionHeader from '../SectionHeader.astro';
+import { getCategories, getHomePage } from '../../data';
+import { localizePath, t } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { trade } = getHomePage();
+const categories = getCategories();
+---
+
+<section aria-labelledby="trade-heading" class="bg-white py-14 lg:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <SectionHeader copy={trade} locale={locale} id="trade-heading" />
+    <ul class="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-12 lg:grid-cols-4 lg:gap-6">
+      {
+        categories.map((category) => (
+          <li>
+            <a
+              href={localizePath(`what-we-trade#${category.slug.current}`, locale)}
+              class="group block h-full overflow-hidden rounded-md border border-silver bg-white transition-colors hover:border-navy"
+            >
+              <div class="overflow-hidden">
+                <Photo
+                  image={category.image}
+                  locale={locale}
+                  framed={false}
+                  sizes="(min-width: 1280px) 290px, (min-width: 1024px) 23vw, 50vw"
+                  class="transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div class="p-3 sm:p-4">
+                <h3 class="text-base font-bold sm:text-lg">{t(category.title, locale)}</h3>
+                <p class="mt-1 text-sm text-slate-600">{t(category.description, locale)}</p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

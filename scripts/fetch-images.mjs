@@ -1,5 +1,6 @@
-// Downloads placeholder photos from Pixabay into public/images/{category}/
-// as WebP files under 200KB, and records attribution in public/images/credits.json.
+// Downloads placeholder photos from Pixabay into src/assets/images/{category}/
+// as WebP files under 200KB, and records attribution in src/assets/images/credits.json.
+// Astro's <Picture> then generates responsive AVIF/WebP sizes from these sources.
 //
 // Additive: existing files are never overwritten, images already in credits.json
 // or listed in scripts/pixabay-exclude.json are skipped, and new credits are merged in.
@@ -12,7 +13,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const OUT_DIR = path.join(ROOT, 'public', 'images');
+const OUT_DIR = path.join(ROOT, 'src', 'assets', 'images');
 const CREDITS_FILE = path.join(OUT_DIR, 'credits.json');
 const EXCLUDE_FILE = path.join(ROOT, 'scripts', 'pixabay-exclude.json');
 const PER_TERM = 3;
@@ -93,7 +94,7 @@ async function toWebp(input) {
 }
 
 // Drop credits for files that no longer exist, then skip anything already used or excluded.
-const credits = (await readJson(CREDITS_FILE, [])).filter((c) => existsSync(path.join(ROOT, 'public', c.file)));
+const credits = (await readJson(CREDITS_FILE, [])).filter((c) => existsSync(path.join(ROOT, c.file)));
 const exclude = await readJson(EXCLUDE_FILE, []);
 const seen = new Set([...credits.map((c) => c.pixabayId), ...exclude.map((e) => e.pixabayId)]);
 let added = 0;
@@ -118,7 +119,7 @@ for (const [category, terms] of Object.entries(CATEGORIES)) {
       await writeFile(path.join(dir, file), webp);
 
       credits.push({
-        file: `/images/${category}/${file}`,
+        file: `/src/assets/images/${category}/${file}`,
         category,
         searchTerm: term,
         pixabayId: hit.id,
