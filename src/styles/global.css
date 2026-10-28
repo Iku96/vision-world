@@ -1,1 +1,46 @@
 @import "tailwindcss";
+
+/* Brand tokens. Contrast notes live in CLAUDE.md. */
+@theme {
+  --color-navy: #0b1f73;
+  --color-navy-dark: #081757;
+  --color-orange: #f07a1a;
+  --color-orange-light: #f6a35c;
+  --color-globe: #2a7fc8;
+  --color-globe-dark: #1f6ab0;
+  --color-silver: #b8bec6;
+  --color-mist: #f1f3f5;
+  --color-ink: #0f172a;
+}
+
+/* Font variables are injected by Astro's <Font> component. */
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-archivo);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading tracking-tight text-navy;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-globe-dark);
+    outline-offset: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-orange-light);
+  }
+}

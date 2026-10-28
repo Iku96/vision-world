@@ -1,0 +1,47 @@
+---
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
+import { getSiteSettings } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  /** 'dark' when placed on a navy background. */
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { locale, tone = 'light', class: className } = Astro.props;
+const { logo, companyName } = getSiteSettings();
+
+// Read the logo's real size at build time to avoid layout shift; fall back to a wordmark if missing.
+const file = fileURLToPath(new URL(`../../public${logo.src}`, import.meta.url));
+const meta = logo.src && existsSync(file) ? await sharp(file).metadata() : undefined;
+---
+
+{
+  meta ? (
+    <span class:list={['inline-flex', tone === 'dark' && 'rounded-md bg-white px-2 py-1', className]}>
+      <img
+        src={logo.src}
+        alt={t(logo.alt, locale)}
+        width={meta.width}
+        height={meta.height}
+        class="h-12 w-auto"
+        decoding="async"
+      />
+    </span>
+  ) : (
+    <span
+      class:list={[
+        'font-heading text-xl font-extrabold uppercase tracking-tight',
+        tone === 'dark' ? 'text-white' : 'text-navy',
+        className,
+      ]}
+    >
+      {companyName}
+    </span>
+  )
+}

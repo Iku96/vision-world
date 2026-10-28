@@ -1,0 +1,56 @@
+---
+import { getSiteSettings } from '../data';
+import { localeMeta, publishedLocales, type Locale } from '../i18n/config';
+import { localizePath, stripLocale, t } from '../i18n/utils';
+import type { ImageRef } from '../data/types';
+
+export interface SeoProps {
+  /** Page title without the site suffix. Omit on the home page. */
+  title?: string;
+  description?: string;
+  ogImage?: ImageRef;
+  ogType?: 'website' | 'article';
+}
+
+interface Props extends SeoProps {
+  locale: Locale;
+}
+
+const { locale, title, description, ogImage, ogType = 'website' } = Astro.props;
+const settings = getSiteSettings();
+
+const fullTitle = title
+  ? settings.seo.titleTemplate.replace('%s', title)
+  : `${settings.companyName} | ${t(settings.tagline, locale)}`;
+const metaDescription = description ?? t(settings.description, locale);
+const image = ogImage ?? settings.seo.ogImage;
+const imageUrl = new URL(image.src, Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// hreflang alternates for every published translation of this page.
+const path = stripLocale(Astro.url.pathname);
+const alternates = publishedLocales.map((l) => ({
+  hreflang: localeMeta[l].htmlLang,
+  href: new URL(localizePath(path, l), Astro.site).href,
+}));
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={metaDescription} />
+<link rel="canonical" href={canonical} />
+{settings.noindex && <meta name="robots" content="noindex" />}
+
+{alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+<link rel="alternate" hreflang="x-default" href={alternates[0].href} />
+
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={settings.companyName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={localeMeta[locale].ogLocale} />
+<meta property="og:image" content={imageUrl} />
+{image.width && <meta property="og:image:width" content={String(image.width)} />}
+{image.height && <meta property="og:image:height" content={String(image.height)} />}
+<meta property="og:image:alt" content={t(image.alt, locale)} />
+<meta name="twitter:card" content="summary_large_image" />

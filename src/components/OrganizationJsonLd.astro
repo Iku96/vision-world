@@ -1,0 +1,33 @@
+---
+import { getSiteSettings } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { companyName, description, logo, contact, social } = getSiteSettings();
+
+// Placeholder values like "[EMAIL ADDRESS]" are left out rather than published as data.
+const known = (value: string) => (value && !value.startsWith('[') ? value : undefined);
+
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: companyName,
+  url: Astro.site?.href,
+  logo: new URL(logo.src, Astro.site).href,
+  description: t(description, locale),
+  email: known(contact.email),
+  telephone: known(contact.phone),
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'TZ',
+  },
+  sameAs: social.length ? social.map((s) => s.url) : undefined,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

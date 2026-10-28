@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import { getUi } from '../data';
+import { localizePath, t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const ui = getUi();
+---
+
+<!-- Fixed CTA bar below lg. BaseLayout pads the body by the same height. -->
+<div class="fixed inset-x-0 bottom-0 z-30 border-t border-silver bg-white/95 px-3 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
+  <div class="mx-auto flex max-w-xl gap-2">
+    <WhatsAppButton locale={locale} label={t(ui.whatsappShort, locale)} class="flex-1" />
+    <a
+      href={localizePath('contact', locale)}
+      class="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-md bg-navy px-4 py-2.5 font-semibold text-white transition-colors hover:bg-navy-dark"
+    >
+      <Icon name="quote" class="size-5 shrink-0" />
+      <span>{t(ui.quoteCta, locale)}</span>
+    </a>
+  </div>
+</div>

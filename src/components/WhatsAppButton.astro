@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import { getUi, getWhatsappUrl } from '../data';
+import { t } from '../i18n/utils';
+import type { Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  /** Prefilled message, e.g. mentioning a listing. Defaults to the site message. */
+  message?: string;
+  label?: string;
+  class?: string;
+}
+
+const { locale, message, label, class: className } = Astro.props;
+const ui = getUi();
+---
+
+<a
+  href={getWhatsappUrl(locale, message)}
+  target="_blank"
+  rel="noopener"
+  class:list={[
+    'inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-orange px-4 py-2.5 font-semibold text-ink transition-colors hover:bg-orange-light',
+    className,
+  ]}
+>
+  <Icon name="whatsapp" class="size-5 shrink-0" />
+  <span>{label ?? t(ui.whatsappCta, locale)}</span>
+</a>
