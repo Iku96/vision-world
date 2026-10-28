@@ -10,10 +10,12 @@ interface Props {
   locale: Locale;
   /** 'dark' when placed on a navy background. */
   tone?: 'light' | 'dark';
+  /** Height classes for the image. */
+  size?: string;
   class?: string;
 }
 
-const { locale, tone = 'light', class: className } = Astro.props;
+const { locale, tone = 'light', size = 'h-12', class: className } = Astro.props;
 const { logo, companyName } = getSiteSettings();
 
 // Read the logo's real size at build time to avoid layout shift; fall back to a wordmark if missing.
@@ -29,7 +31,7 @@ const meta = logo.src && existsSync(file) ? await sharp(file).metadata() : undef
         alt={t(logo.alt, locale)}
         width={meta.width}
         height={meta.height}
-        class="h-12 w-auto"
+        class:list={[size, 'w-auto']}
         decoding="async"
       />
     </span>
