@@ -18,6 +18,8 @@ export const homePage: HomePage = {
     sourcingLabel: { en: 'Now sourcing' },
     from: { label: { en: 'Korea' }, lat: 37.5, lon: 127 },
     to: { label: { en: 'Tanzania' }, lat: -6.4, lon: 35 },
+    headingLead: { en: 'From Korea' },
+    headingAccent: { en: 'to Tanzania.' },
   },
   trade: {
     eyebrow: { en: 'What we trade' },
@@ -25,6 +27,12 @@ export const homePage: HomePage = {
     intro: { en: 'We source a wide range of goods, mainly from South Korea. If you do not see what you need, ask us.' },
     link: { label: { en: 'See everything we trade' }, href: 'what-we-trade' },
   },
+  facts: [
+    { icon: 'globe', label: { en: 'Sourcing from' }, value: { en: 'South Korea and beyond' } },
+    { icon: 'pin', label: { en: 'Office' }, value: { en: 'Dar es Salaam, Tanzania' } },
+    { icon: 'package', label: { en: 'What we trade' }, value: { en: '{categories} product categories' } },
+    { icon: 'whatsapp', label: { en: 'WhatsApp' }, value: { en: '{hours}' } },
+  ],
   stock: {
     eyebrow: { en: 'Stock' },
     heading: { en: 'Available and incoming' },

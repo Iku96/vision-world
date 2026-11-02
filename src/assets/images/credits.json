@@ -736,5 +736,29 @@
     "user": "bellergy",
     "pageURL": "https://pixabay.com/videos/id-23215/",
     "note": "First 10s, re-encoded to 960px H.264 without audio. Home CTA background."
+  },
+  {
+    "file": "/src/assets/images/kitchenware/kitchenware-shop-1.webp",
+    "category": "kitchenware",
+    "searchTerm": "kitchenware shop",
+    "pixabayId": 5619193,
+    "user": "tianya1223",
+    "pageURL": "https://pixabay.com/photos/shop-business-store-merchandise-5619193/"
+  },
+  {
+    "file": "/src/assets/images/electronics/electronics-1.webp",
+    "category": "electronics",
+    "searchTerm": "electronics",
+    "pixabayId": 1483974,
+    "user": "Monoar_CGI_Artist",
+    "pageURL": "https://pixabay.com/photos/laptop-workstation-browsing-tablet-1483974/"
+  },
+  {
+    "file": "/src/assets/images/vehicles/suv-parking-lot-1.webp",
+    "category": "vehicles",
+    "searchTerm": "suv parking lot",
+    "pixabayId": 7850450,
+    "user": "donauwood_de",
+    "pageURL": "https://pixabay.com/photos/cars-vehicles-dimensions-7850450/"
   }
 ]

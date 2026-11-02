@@ -37,7 +37,7 @@ export const categories: Category[] = [
       { en: 'SUVs for business and fleet use' },
       { en: '[MAKES AND MODELS YOU USUALLY SOURCE]' },
     ],
-    image: { src: '/src/assets/images/vehicles/suv-car-1.webp', alt: { en: 'Grey SUV parked by the coast, side view' } },
+    image: { src: '/src/assets/images/vehicles/suv-parking-lot-1.webp', alt: { en: 'Yard packed with rows of parked SUVs, seen from above' } },
   },
   {
     _id: 'category-spare-parts',
@@ -73,7 +73,7 @@ export const categories: Category[] = [
       { en: 'Radios' },
       { en: '[OTHER ELECTRONICS]' },
     ],
-    image: { src: '/src/assets/images/electronics/radio-1.webp', alt: { en: 'Red portable radio' } },
+    image: { src: '/src/assets/images/electronics/electronics-1.webp', alt: { en: 'Laptop, tablet and headphones on a white desk' } },
   },
   {
     _id: 'category-kitchenware',
@@ -91,7 +91,7 @@ export const categories: Category[] = [
       { en: 'Kitchen utensils' },
       { en: '[OTHER KITCHENWARE]' },
     ],
-    image: { src: '/src/assets/images/kitchenware/cooking-pots-3.webp', alt: { en: 'Cooking pot with fresh vegetables' } },
+    image: { src: '/src/assets/images/kitchenware/kitchenware-shop-1.webp', alt: { en: 'Store aisle with shelves of plates, bowls and kitchenware' } },
   },
   {
     _id: 'category-clothing',

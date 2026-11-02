@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import OrganizationJsonLd from '../components/OrganizationJsonLd.astro';
 import Hero from '../components/home/Hero.astro';
+import FactsStrip from '../components/home/FactsStrip.astro';
+import Ticker from '../components/home/Ticker.astro';
 import TradeSection from '../components/home/TradeSection.astro';
 import StockSection from '../components/home/StockSection.astro';
 import HowWeWorkSection from '../components/home/HowWeWorkSection.astro';
@@ -21,6 +23,8 @@ const { locale } = Astro.props;
 <BaseLayout>
   <OrganizationJsonLd slot="head" locale={locale} />
   <Hero locale={locale} />
+  <FactsStrip locale={locale} />
+  <Ticker locale={locale} />
   <TradeSection locale={locale} />
   <StockSection locale={locale} />
   <HowWeWorkSection locale={locale} />

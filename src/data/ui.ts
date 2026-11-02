@@ -35,6 +35,7 @@ export const ui = {
   breadcrumb: { en: 'Breadcrumb' },
   home: { en: 'Home' },
   viewDetails: { en: 'View details' },
+  viewCategory: { en: 'View category' },
   /** {item} is replaced with what the visitor is looking for. */
   lookingForMessage: { en: 'Hello Vision World, I am looking for: {item}' },
   askAboutCategory: { en: 'Ask about {item}' },

@@ -1,0 +1,42 @@
+---
+// Row of plain facts straight under the hero, on the same navy so it reads as part of it.
+// Values come from data, with {categories} and {hours} filled in, so nothing is invented.
+import Icon from '../Icon.astro';
+import { getCategories, getHomePage, getSiteSettings } from '../../data';
+import { t } from '../../i18n/utils';
+import type { Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const facts = getHomePage().facts ?? [];
+const fill = (value: string) =>
+  value
+    .replace('{categories}', String(getCategories().length))
+    .replace('{hours}', t(getSiteSettings().contact.hours, locale));
+---
+
+{
+  facts.length > 0 && (
+    <section class="on-dark bg-navy-dark text-white">
+      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        {/* 1px gaps over a faint background draw the dividers, so they line up whatever the text length. */}
+        <ul class="grid grid-cols-2 gap-px border-t border-white/10 bg-white/10 lg:grid-cols-4">
+          {facts.map((fact) => (
+            <li class="flex items-start gap-3 bg-navy-dark px-4 py-5 lg:px-6 lg:py-7">
+              <span class="flex size-10 shrink-0 items-center justify-center rounded-md border border-white/15 text-orange-light">
+                <Icon name={fact.icon} class="size-5" />
+              </span>
+              <div class="min-w-0">
+                <p class="text-xs font-semibold tracking-wider text-silver uppercase">{t(fact.label, locale)}</p>
+                <p class="mt-0.5 font-heading text-sm leading-snug font-bold sm:text-base">{fill(t(fact.value, locale))}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

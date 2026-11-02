@@ -24,6 +24,8 @@ const items = getCategories().map((c) => ({
 // Fixed cell count (longest label) so the board never changes width.
 const cells = Math.max(...items.map((i) => i.label.length));
 const first = items[0].label.padEnd(cells, ' ');
+// Uppercase two-tone headline (accent line in orange) when both parts are set, else the plain heading.
+const twoTone = hero.headingLead && hero.headingAccent;
 const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), lat: p.lat, lon: p.lon });
 ---
 
@@ -55,11 +57,20 @@ const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), 
         data-to={endpoint(hero.to)}></canvas>
     </div>
 
-    <div class="relative max-w-xl pt-2 lg:pt-0">
+    <div class="relative max-w-2xl pt-2 lg:pt-0">
       <p class="text-xs font-semibold tracking-[0.18em] text-orange-light uppercase sm:text-sm">{t(hero.eyebrow, locale)}</p>
-      <h1 class="mt-3 text-[2.5rem] leading-[1.02] font-extrabold text-white sm:mt-4 sm:text-6xl lg:text-7xl">
-        {t(hero.heading, locale)}
-      </h1>
+      {
+        twoTone ? (
+          <h1 class="mt-3 text-[2.4rem] leading-[0.98] font-extrabold tracking-[-0.02em] text-white uppercase sm:mt-4 sm:text-6xl lg:text-7xl">
+            <span class="block">{t(hero.headingLead!, locale)}</span>
+            <span class="block text-orange-light">{t(hero.headingAccent!, locale)}</span>
+          </h1>
+        ) : (
+          <h1 class="mt-3 text-[2.5rem] leading-[1.02] font-extrabold text-white sm:mt-4 sm:text-6xl lg:text-7xl">
+            {t(hero.heading, locale)}
+          </h1>
+        )
+      }
 
       <!-- Split-flap board. Links to the category on show; screen readers get the full list. -->
       <div class="mt-4 sm:mt-6">
@@ -97,18 +108,18 @@ const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), 
 
 <style>
   /* Phones: tint the photo for the globe, fade to navy at the bottom for the text.
-     Desktop: solid navy on the left blending into a tinted photo. */
+     Desktop: solid navy on the left blending into a tinted photo. A deep, cinematic tint. */
   .hero-shade {
     background:
-      linear-gradient(to top, #0b1f73 0%, transparent 45%),
-      rgb(8 23 87 / 0.55);
+      linear-gradient(to top, #081757 0%, transparent 50%),
+      rgb(8 23 87 / 0.68);
   }
 
   @media (min-width: 64rem) {
     .hero-shade {
       background:
-        linear-gradient(to right, #0b1f73 0%, rgb(11 31 115 / 0.7) 30%, rgb(8 23 87 / 0.45) 70%, rgb(8 23 87 / 0.35) 100%),
-        linear-gradient(to top, rgb(8 23 87 / 0.5), transparent 40%);
+        linear-gradient(to right, #081757 0%, rgb(8 23 87 / 0.85) 32%, rgb(8 23 87 / 0.55) 70%, rgb(8 23 87 / 0.45) 100%),
+        linear-gradient(to top, rgb(8 23 87 / 0.7), transparent 45%);
     }
   }
 

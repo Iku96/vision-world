@@ -139,7 +139,12 @@ export interface HomePage {
     sourcingLabel: LocalizedString;
     from: RoutePoint;
     to: RoutePoint;
+    /** Two-tone headline: lead in white, accent line in orange. Falls back to heading if either is missing. */
+    headingLead?: LocalizedString;
+    headingAccent?: LocalizedString;
   };
+  /** Row of plain facts under the hero. No invented numbers. */
+  facts?: HomeFact[];
   trade: SectionCopy;
   stock: SectionCopy;
   howWeWork: SectionCopy;
@@ -152,6 +157,13 @@ export interface HomePage {
   group: SectionCopy;
   /** Looping background for the closing call to action on the home page. */
   ctaBackground?: VideoBackground;
+}
+
+export interface HomeFact {
+  icon: IconName;
+  label: LocalizedString;
+  /** {categories} becomes the number of categories, {hours} the office hours from siteSettings. */
+  value: LocalizedString;
 }
 
 /** Muted looping video, played on desktop only. The poster shows first and is all phones get. */
