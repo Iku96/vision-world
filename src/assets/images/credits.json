@@ -646,5 +646,86 @@
     "pixabayId": 7615816,
     "user": "jwvein",
     "pageURL": "https://pixabay.com/photos/car-suv-mud-off-road-water-7615816/"
+  },
+  {
+    "file": "/src/assets/images/machinery/industrial-machinery-1.webp",
+    "category": "machinery",
+    "searchTerm": "industrial machinery",
+    "pixabayId": 1140760,
+    "user": "652234",
+    "pageURL": "https://pixabay.com/photos/factory-building-industry-1140760/"
+  },
+  {
+    "file": "/src/assets/images/machinery/industrial-machinery-2.webp",
+    "category": "machinery",
+    "searchTerm": "industrial machinery",
+    "pixabayId": 1236578,
+    "user": "MustangJoe",
+    "pageURL": "https://pixabay.com/photos/gears-cogs-machine-machinery-1236578/"
+  },
+  {
+    "file": "/src/assets/images/machinery/industrial-machinery-3.webp",
+    "category": "machinery",
+    "searchTerm": "industrial machinery",
+    "pixabayId": 1736293,
+    "user": "xusenru",
+    "pageURL": "https://pixabay.com/photos/mining-excavator-mining-1736293/"
+  },
+  {
+    "file": "/src/assets/images/machinery/excavator-1.webp",
+    "category": "machinery",
+    "searchTerm": "excavator",
+    "pixabayId": 1212472,
+    "user": "Tama66",
+    "pageURL": "https://pixabay.com/photos/excavator-construction-machine-1212472/"
+  },
+  {
+    "file": "/src/assets/images/machinery/excavator-2.webp",
+    "category": "machinery",
+    "searchTerm": "excavator",
+    "pixabayId": 1050501,
+    "user": "Darkmoon_Art",
+    "pageURL": "https://pixabay.com/photos/excavators-bucket-wheel-excavators-1050501/"
+  },
+  {
+    "file": "/src/assets/images/machinery/excavator-3.webp",
+    "category": "machinery",
+    "searchTerm": "excavator",
+    "pixabayId": 1174428,
+    "user": "652234",
+    "pageURL": "https://pixabay.com/photos/excavator-construction-site-build-1174428/"
+  },
+  {
+    "file": "/src/assets/images/machinery/generator-machine-1.webp",
+    "category": "machinery",
+    "searchTerm": "generator machine",
+    "pixabayId": 5476642,
+    "user": "is463940",
+    "pageURL": "https://pixabay.com/photos/generator-alternator-equipment-5476642/"
+  },
+  {
+    "file": "/src/assets/images/machinery/generator-machine-2.webp",
+    "category": "machinery",
+    "searchTerm": "generator machine",
+    "pixabayId": 6826340,
+    "user": "Tama66",
+    "pageURL": "https://pixabay.com/photos/pforphoto-machinery-power-plant-6826340/"
+  },
+  {
+    "file": "/src/assets/images/machinery/generator-machine-3.webp",
+    "category": "machinery",
+    "searchTerm": "generator machine",
+    "pixabayId": 3164896,
+    "user": "herbert2512",
+    "pageURL": "https://pixabay.com/photos/machine-wheel-old-equipment-3164896/"
+  },
+  {
+    "file": "/src/assets/images/video/container-port-poster.webp",
+    "category": "video",
+    "searchTerm": "container port",
+    "pixabayId": 23215,
+    "user": "bellergy",
+    "pageURL": "https://pixabay.com/videos/id-23215/",
+    "note": "Poster frame of /src/assets/videos/container-port.mp4 (first 10s, re-encoded)"
   }
 ]

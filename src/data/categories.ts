@@ -145,4 +145,22 @@ export const categories: Category[] = [
     ],
     image: { src: '/src/assets/images/bicycles/vintage-bicycle-3.webp', alt: { en: 'Vintage bicycle outside a shop' } },
   },
+  {
+    _id: 'category-machinery',
+    _type: 'category',
+    slug: { current: 'industrial-machinery' },
+    order: 9,
+    title: { en: 'Industrial machinery and equipment' },
+    shortTitle: { en: 'Machinery' },
+    description: { en: 'Machinery and equipment for construction, industry and business.' },
+    body: [
+      { en: 'We source industrial machinery and equipment for construction, workshops and businesses in Tanzania.' },
+      { en: 'Tell us the type of machine, the specification and the budget you have in mind, and we will look for options that match.' },
+    ],
+    examples: [
+      { en: '[MACHINERY TYPES YOU USUALLY SOURCE]' },
+      { en: '[OTHER EQUIPMENT]' },
+    ],
+    image: { src: '/src/assets/images/machinery/excavator-1.webp', alt: { en: 'Yellow wheeled excavator on a work site' } },
+  },
 ];

@@ -32,6 +32,7 @@ const CATEGORIES = {
   clothing: ['clothes rack', 'second hand clothes'],
   bags: ['travel bag', 'leather duffel bag'],
   bicycles: ['vintage bicycle'],
+  machinery: ['industrial machinery', 'excavator', 'generator machine'],
   yard: ['truck yard', 'truck parking lot', 'truck depot', 'container terminal trucks', 'port container yard'],
 };
 

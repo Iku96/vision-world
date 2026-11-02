@@ -93,7 +93,7 @@ const related = getListingsByCategory(listing.category._ref)
           />
           <a
             href={`${localizePath('contact', locale)}${category ? `?category=${category.slug.current}` : ''}`}
-            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-navy px-6 font-semibold text-navy transition-colors hover:bg-navy hover:text-white"
+            class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-navy px-6 font-semibold text-navy btn-motion hover:bg-navy hover:text-white"
           >
             <Icon name="quote" class="size-5" />
             {t(ui.quoteCta, locale)}

@@ -17,20 +17,23 @@ const steps = getBuyerJourney();
 <section aria-labelledby="how-heading" class="bg-white py-14 lg:py-24">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <SectionHeader copy={howWeWork} locale={locale} id="how-heading" />
-    <ol class="mt-10 grid gap-8 lg:mt-14 lg:grid-cols-4 lg:gap-6">
+    <ol class="mt-10 grid gap-8 lg:mt-14 lg:grid-cols-4 lg:gap-6" data-route="responsive">
       {
         steps.map((step, i) => (
-          <li class="relative pl-16 lg:pl-0">
-            {/* Orange route segment to the next step: vertical on mobile, horizontal on desktop. */}
+          <li class="relative pl-16 lg:pl-0" data-step>
+            {/* Orange route segment to the next step: vertical on mobile, horizontal on desktop.
+                Draws with the scroll (motion.ts). */}
             {i < steps.length - 1 && (
               <span
-                class="draw-y lg:draw-x absolute top-10 -bottom-8 left-5 w-0.5 bg-orange lg:top-5 lg:-right-6 lg:bottom-auto lg:left-10 lg:h-0.5 lg:w-auto"
+                class="absolute top-10 -bottom-8 left-5 w-0.5 bg-orange lg:top-5 lg:-right-6 lg:bottom-auto lg:left-10 lg:h-0.5 lg:w-auto"
                 aria-hidden="true"
+                data-route-line
               />
             )}
             <span
               class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-full bg-navy font-heading font-bold text-white lg:relative"
               aria-hidden="true"
+              data-step-marker
             >
               {i + 1}
             </span>

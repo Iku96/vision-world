@@ -30,7 +30,7 @@ Korea is the main source, not the only one. Say "from Korea and beyond", never "
 
 ### What they trade
 
-Trucks (Scania tractor heads, Samsung and Hyundai trucks), SUVs, spare parts, refrigerators, radios, electronics, used clothes, kitchenware, safari bags, rare used bicycles.
+Trucks (Scania tractor heads, Samsung and Hyundai trucks), SUVs, spare parts, refrigerators, radios, electronics, used clothes, kitchenware, safari bags, rare used bicycles, industrial machinery and equipment.
 
 ### Future divisions (shown as "Coming soon")
 
@@ -68,7 +68,7 @@ Swahili versions live at the same paths under `/sw/` (for example `/sw/about`) o
 
 - **Astro** (static output) + **Tailwind CSS v4** via `@tailwindcss/vite`. `@astrojs/sitemap` with `site: https://vision-world.vercel.app` (temporary, update at launch).
 - **Fonts:** Archivo (headings, 700/800) and Inter (body, 400/500/600) via Astro's built-in fonts API (`fonts` in `astro.config.mjs`, Fontsource provider). Files are downloaded at build time and served from the site. Exposed as Tailwind `font-heading` and `font-sans`.
-- **No UI framework.** Use `.astro` components. Add client JS only when unavoidable (for example a mobile nav toggle or stock filter), as small inline scripts. No React/Vue islands unless agreed.
+- **No UI framework.** Use `.astro` components. Add client JS only when unavoidable (for example a mobile nav toggle or stock filter), as small inline scripts. No React/Vue islands unless agreed. GSAP (with ScrollTrigger) is the one motion library, loaded on demand.
 - **Sanity CMS comes later.** Until then all content lives in typed data files under `src/data/`.
 
 ### Content model (`src/data/`)
@@ -103,7 +103,9 @@ Serious, trustworthy B2B trading company. Clean, bold, modern. Not flashy.
 
 - Preview banner above the header on every page while `siteSettings.previewBanner` is true. When turning it off, also remove the banner allowance in `src/components/home/heroHeight.ts`.
 - Home hero: yard photo with navy gradient, dotted globe (Korea and Tanzania highlighted) and a "Now sourcing" split-flap board; each flip sends a pulse along the Korea to Tanzania arc. Fits one phone screen with buttons visible.
-- Scroll motion (`ScrollMotion.astro`, styles in `global.css`): blocks below the fold rise in as they enter the screen, list items one after another; route lines draw in; orange progress line on the header; back-to-top button after scrolling; cards lift on hover. Transforms and opacity only (no layout shift), all off for `prefers-reduced-motion`, and nothing is hidden if JavaScript fails.
+- Scroll motion (`ScrollMotion.astro`, GSAP + ScrollTrigger in `src/scripts/motion.ts`, styles in `global.css`): GSAP is a lazy chunk, downloaded only when motion is allowed and the page has something below the fold to animate. Blocks below the fold fade and rise in (under 600ms, card grids staggered); on How We Work (`[data-route]`) the orange line draws with the scroll and each `[data-step]` lights up when reached; gentle parallax on the hero photo and real section photos (`[data-parallax]`, desktop only, skipped for placeholders). Plus the orange progress line on the header, back-to-top button, cards lift and card images zoom on hover, buttons (`.btn-motion`) rise slightly. Transforms and opacity only (no layout shift), all off for `prefers-reduced-motion`, and nothing is hidden if JavaScript fails.
+- Page changes: native cross-document view transitions (`@view-transition` in `global.css`, no JavaScript), a short cross-fade with the header and mobile CTA bar held still. Astro's `<ClientRouter />` is deliberately not used: it would add JS to every page and require re-running every page script on navigation.
+- Home closing CTA: muted looping video background (`homePage.ctaBackground`, file in `src/assets/videos/`, under 2MB). Desktop only with motion allowed and no data saver; phones and everyone else get the poster image.
 - Sticky white header: logo, nav (desktop), language switcher, WhatsApp button (desktop). Hamburger menu below `lg`.
 - Below `lg`, a fixed bottom bar holds WhatsApp (primary) and Request a quote. The body gets bottom padding so it never covers content.
 - Navy footer with contact details and page links.
@@ -150,7 +152,7 @@ Do not present these as fact on the site until confirmed. Keep the current wordi
 - **Inspection:** whether buyers can inspect goods in Tanzania before handover, as the current How We Work copy implies.
 - **Handover:** how and where delivery or collection happens in Tanzania.
 - **CEO details:** ~~name~~ received: Joseph Makina (in `siteSettings.ceo`). Still needed: story, quote, portrait photo.
-- ~~**Contact details**~~ received: phone and WhatsApp +255 680 418 090, info@vision-world.com, Monday to Friday 9am to 5pm, 4th Floor, Noble Center, Makumbusho, Dar es Salaam (all in `siteSettings.contact`).
+- ~~**Contact details**~~ received: phone and WhatsApp +255 680 418 090, info@vision-world.com, Monday to Friday 9am to 5pm, 4th Floor, Noble Center, Victoria, Dar es Salaam (all in `siteSettings.contact`).
 - **Copy in `[CONFIRM: ...]` brackets:** How We Work step details and FAQ answers (payment, inspection, timelines, documents, who you sell to), category examples, company history.
 - **About page values:** the four values are general wording written for review, not supplied by the client.
 - **Sample listings:** all nine are placeholders. Replace with real stock.

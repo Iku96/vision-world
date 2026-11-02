@@ -88,6 +88,8 @@ export interface Category {
   _type: 'category';
   slug: Slug;
   title: LocalizedString;
+  /** Shorter label where space is tight (the hero's split-flap board). Falls back to title. */
+  shortTitle?: LocalizedString;
   description: LocalizedString;
   /** Longer copy for the category page, one string per paragraph. */
   body: LocalizedString[];
@@ -148,6 +150,15 @@ export interface HomePage {
     image: ImageRef;
   };
   group: SectionCopy;
+  /** Looping background for the closing call to action on the home page. */
+  ctaBackground?: VideoBackground;
+}
+
+/** Muted looping video, played on desktop only. The poster shows first and is all phones get. */
+export interface VideoBackground {
+  /** '/src/assets/videos/...', short and under 2MB. */
+  video: string;
+  poster: ImageRef;
 }
 
 /** A place on the hero globe. */

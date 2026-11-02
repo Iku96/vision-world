@@ -18,7 +18,7 @@ interface Props {
 const { locale } = Astro.props;
 const { hero } = getHomePage();
 const items = getCategories().map((c) => ({
-  label: t(c.title, locale).toUpperCase(),
+  label: t(c.shortTitle ?? c.title, locale).toUpperCase(),
   href: localizePath(`what-we-trade/${c.slug.current}`, locale),
 }));
 // Fixed cell count (longest label) so the board never changes width.
@@ -35,7 +35,8 @@ const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), 
   >
     <!-- Photo + globe: in the flow on phones (takes the leftover height), right side on desktop. -->
     <div class="relative -mx-4 min-h-0 flex-1 overflow-hidden sm:-mx-6 lg:absolute lg:inset-0 lg:left-[30%] lg:-z-10 lg:mx-0">
-      <div class="absolute inset-0 will-change-transform" data-parallax>
+      <!-- Desktop parallax via ScrollMotion (motion.ts). -->
+      <div class="absolute inset-0" data-parallax="hero">
         <Photo
           image={hero.image}
           locale={locale}
@@ -425,25 +426,6 @@ const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), 
     }).observe(board);
   }
 
-  function initParallax(layer: HTMLElement) {
-    // The photo layer moves at a quarter of the scroll speed inside its clipped frame.
-    let queued = false;
-    const update = () => {
-      queued = false;
-      layer.style.transform = `translate3d(0, ${Math.min(scrollY, innerHeight) * 0.25}px, 0)`;
-    };
-    addEventListener(
-      'scroll',
-      () => {
-        if (!queued) {
-          queued = true;
-          requestAnimationFrame(update);
-        }
-      },
-      { passive: true },
-    );
-  }
-
   const canvas = document.querySelector<HTMLCanvasElement>('[data-globe]');
   const data = document.getElementById('globe-data')?.textContent;
   if (canvas && data) initGlobe(canvas, JSON.parse(data));
@@ -451,7 +433,5 @@ const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), 
   if (!reduce) {
     const board = document.querySelector<HTMLAnchorElement>('[data-flap]');
     if (board) initBoard(board);
-    const layer = document.querySelector<HTMLElement>('[data-parallax]');
-    if (layer) initParallax(layer);
   }
 </script>

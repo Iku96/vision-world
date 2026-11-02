@@ -53,4 +53,9 @@ export const homePage: HomePage = {
     intro: { en: 'We are building new divisions to serve Tanzania and the wider region.' },
     link: { label: { en: 'Learn about Vision Group' }, href: 'vision-group' },
   },
+  // Pixabay placeholder (video 23215 by bellergy, see credits.json). Decorative, so no alt text.
+  ctaBackground: {
+    video: '/src/assets/videos/container-port.mp4',
+    poster: { src: '/src/assets/images/video/container-port-poster.webp', alt: { en: '' } },
+  },
 };

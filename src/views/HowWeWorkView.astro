@@ -26,17 +26,18 @@ const steps = getBuyerJourney();
   />
 
   <section class="bg-white py-14 lg:py-20">
-    <ol class="mx-auto grid max-w-5xl gap-10 px-4 sm:px-6 lg:px-8">
+    <ol class="mx-auto grid max-w-5xl gap-10 px-4 sm:px-6 lg:px-8" data-route>
       {
         steps.map((step, i) => (
-          <li class="relative grid gap-4 pl-16 sm:pl-20">
-            {/* Orange route line joining the steps. */}
+          <li class="relative grid gap-4 pl-16 sm:pl-20" data-step>
+            {/* Orange route line joining the steps. Draws with the scroll (motion.ts). */}
             {i < steps.length - 1 && (
-              <span class="draw-y absolute top-14 -bottom-10 left-6 w-0.5 bg-orange sm:left-7" aria-hidden="true" />
+              <span class="absolute top-14 -bottom-10 left-6 w-0.5 bg-orange sm:left-7" aria-hidden="true" data-route-line />
             )}
             <span
               class="absolute top-0 left-0 flex size-12 items-center justify-center rounded-full bg-navy text-white sm:size-14"
               aria-hidden="true"
+              data-step-marker
             >
               <Icon name={step.icon} class="size-6" />
             </span>
