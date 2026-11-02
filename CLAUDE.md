@@ -80,6 +80,7 @@ Components never hardcode copy. All text, links, phone numbers and listings come
 - Shape documents the Sanity way: `_id`, `_type`, `slug: { current: string }`, image fields as objects (`{ src, alt }`), rich text kept simple for now. All user-facing text is `LocalizedString`.
 - Access data through getter functions in `src/data/index.ts` (for example `getListings()`, `getSiteSettings()`) rather than importing arrays directly. These become the Sanity queries later.
 - `siteSettings` holds: company name, CEO name and role, tagline, WhatsApp number, default WhatsApp message, email, phone, address, social links, default SEO (title template, description, OG image) and the `noindex` flag.
+- Categories can have an optional `shortTitle`, used where space is tight (the hero split-flap board), e.g. "Machinery" for "Industrial machinery and equipment".
 - Listing status is a union type: `'available' | 'sold' | 'incoming'`.
 - Listing price is a discriminated union: `{ type: 'fixed'; amountTZS: number }` or `{ type: 'onRequest' }`. Format TZS with `Intl.NumberFormat`. Never invent prices; use `onRequest` when unknown.
 
@@ -90,6 +91,7 @@ Components never hardcode copy. All text, links, phone numbers and listings come
 - `public/` holds only site files that must keep fixed URLs: `logo.png`, `og-default.png`, favicons. Original logo sources live in `brand/` (not deployed).
 - Real Vision World photos replace placeholders before launch. Stock listings use the `PlaceholderImage` (empty `src`), never a stock photo pretending to be real stock.
 - `scripts/fetch-images.mjs` (`npm run fetch-images`) pulls Pixabay photos into `src/assets/images/` with credits in `src/assets/images/credits.json`. It only adds: never overwrites files, and skips IDs in `scripts/pixabay-exclude.json`. The client runs it separately; don't depend on specific files existing.
+- Videos live in `src/assets/videos/` (referenced by full path in data, like photos). Only one so far: the home CTA background `container-port.mp4` (Pixabay 23215, 10s, 702KB), with its poster frame in `src/assets/images/video/`. Keep any video short, muted and under 2MB, and credit it in `credits.json`.
 
 ### Logo
 
@@ -152,10 +154,11 @@ Do not present these as fact on the site until confirmed. Keep the current wordi
 - **Inspection:** whether buyers can inspect goods in Tanzania before handover, as the current How We Work copy implies.
 - **Handover:** how and where delivery or collection happens in Tanzania.
 - **CEO details:** ~~name~~ received: Joseph Makina (in `siteSettings.ceo`). Still needed: story, quote, portrait photo.
-- ~~**Contact details**~~ received: phone and WhatsApp +255 680 418 090, info@vision-world.com, Monday to Friday 9am to 5pm, 4th Floor, Noble Center, Victoria, Dar es Salaam (all in `siteSettings.contact`).
+- ~~**Contact details**~~ received: phone and WhatsApp +255 680 418 090, info@vision-world.com, Monday to Friday 9am to 5pm, 4th Floor, Noble Center, Victoria, Dar es Salaam (all in `siteSettings.contact`). The area was changed from Makumbusho to Victoria on 2026-11-02 at the client's request.
 - **Copy in `[CONFIRM: ...]` brackets:** How We Work step details and FAQ answers (payment, inspection, timelines, documents, who you sell to), category examples, company history.
 - **About page values:** the four values are general wording written for review, not supplied by the client.
 - **Sample listings:** all nine are placeholders. Replace with real stock.
+- **Industrial machinery:** new category (added 2026-11-02). Still needed: which machinery and equipment types they source (examples are `[...]` placeholders), the description wording, and a real photo (the excavator is a Pixabay placeholder).
 - **Official company name:** legal or registered name for the footer and Organization JSON-LD.
 - **Price display preference:** whether to show TZS prices on listings or always "Price on request".
 
@@ -173,3 +176,11 @@ Do not present these as fact on the site until confirmed. Keep the current wordi
 - `npm run check` (astro check) for type checking, including `.astro` files
 - `npm run build && npm run check:links` checks every internal link, asset and `#anchor` in `dist/`
 - `node scripts/build-globe-data.mjs` regenerates `src/data/geo/globe.json` (hero globe land dots and the Korea and Tanzania shapes, from Natural Earth via `world-atlas`)
+
+## Session log
+
+One line per working session: date, what was done, what's next. **Add a line at the end of every session.**
+
+- 2026-10-28: Astro setup, brand tokens, i18n structure, image fetch script, home page and full site build-out for client review, contact details, back-to-top and scroll motion. Next: client review, real photos and copy.
+- 2026-11-02: GSAP motion layer (lazy-loaded reveals, How We Work route draw, desktop parallax), hover polish, built-in view transitions, home CTA video (desktop only), address changed to Victoria, Industrial machinery category. Next: confirm machinery details with client, test reduced motion in a real browser.
+- 2026-11-02: Docs housekeeping: CLAUDE.md brought up to date, session log added, CTA video credit, `.claude/launch.json` ignored. Next: items under "To confirm with client", real photos, Swahili content.

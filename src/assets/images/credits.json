@@ -727,5 +727,14 @@
     "user": "bellergy",
     "pageURL": "https://pixabay.com/videos/id-23215/",
     "note": "Poster frame of /src/assets/videos/container-port.mp4 (first 10s, re-encoded)"
+  },
+  {
+    "file": "/src/assets/videos/container-port.mp4",
+    "category": "video",
+    "searchTerm": "container port",
+    "pixabayId": 23215,
+    "user": "bellergy",
+    "pageURL": "https://pixabay.com/videos/id-23215/",
+    "note": "First 10s, re-encoded to 960px H.264 without audio. Home CTA background."
   }
 ]
