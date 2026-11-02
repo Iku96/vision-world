@@ -320,7 +320,9 @@ const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), 
       c.font = '700 11px Inter, system-ui, sans-serif';
       for (let i = pulses.length - 1; i >= 0; i--) {
         const p = pulses[i];
-        const t = (time - p.start) / FLIGHT_MS;
+        // A frame's timestamp can be slightly earlier than a pulse that was just added, so clamp at 0:
+        // a negative position would point outside the route and stop the whole animation.
+        const t = Math.max(0, (time - p.start) / FLIGHT_MS);
         if (t >= 1) {
           tz.glowAt = time;
           pulses.splice(i, 1);
@@ -386,9 +388,10 @@ const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), 
       kr.glowAt = now;
     });
 
-    // Only animate while the hero is on screen.
-    new IntersectionObserver(([entry]) => {
-      running = entry.isIntersecting;
+    // Only animate while the hero is on screen. A quick scroll away and back can arrive as one batch
+    // ("left", then "back"), so go by the latest entry.
+    new IntersectionObserver((entries) => {
+      running = entries[entries.length - 1].isIntersecting;
       cancelAnimationFrame(frame);
       if (running) frame = requestAnimationFrame(loop);
     }).observe(canvas);
@@ -427,9 +430,9 @@ const endpoint = (p: RoutePoint) => JSON.stringify({ label: t(p.label, locale), 
     // First pulse for the word already on the board, then cycle while visible.
     setTimeout(() => announce(items[0].label), 600);
     let timer = 0;
-    new IntersectionObserver(([entry]) => {
+    new IntersectionObserver((entries) => {
       clearInterval(timer);
-      if (entry.isIntersecting)
+      if (entries[entries.length - 1].isIntersecting)
         timer = window.setInterval(() => {
           index = (index + 1) % items.length;
           show(items[index]);
